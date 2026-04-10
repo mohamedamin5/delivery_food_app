@@ -1,0 +1,55 @@
+    {
+    "@@locale": "en",
+    "button_next": "Next",
+    "button_get_started": "Get Started",
+    "button_skip": "Skip",
+
+    "onboarding_title_1": "All Your Favorites",
+    "onboarding_title_2": "Order From Chosen Chef",
+    "onboarding_title_3": "Free Delivery Offers",
+    "onboarding_description": "Get your favorite foods in one place; you just place the order, we do the rest",
+
+    "login_title": "Log In",
+    "login_description": "Please sign in to your existing account",
+    "signup_title": "Sign Up",
+    "signup_description": "Please sign up to get started",
+
+    "hint_name": "Name",
+    "hint_email": "Email",
+    "hint_password": "Password",
+    "hint_retype_password": "Re-type Password",
+    "search_hint":"Search",
+
+    "button_login": "Log In",
+    "button_signup": "Sign Up",
+    "text_dont_have_account": "Don't have an account?",
+    "text_remember_me": "Remember me",
+    "text_forgot_password": "Forgot Password?",
+
+    "search_placeholder": "Search",
+    "verification_title": "Verification",
+    "verification_description": "We have sent the code to your email",
+    "button_send_code": "Send Code",
+    "button_verify": "Verify",
+
+    "home_deliver_to": "Deliver To",
+    "home_hey": "Hey",
+    "home_good_afternoon": "Good Afternoon",
+    "home_all_categories": "All Categories",
+    "home_see_all": "See All",
+    "home_open_restaurants": "Open Restaurants",
+
+    "category_all": "All",
+    "category_hotdog": "Hot Dog",
+    "category_burger": "Burger",
+    "category_pizza": "Pizza",
+
+    "error_email_empty": "Email cannot be empty",
+    "error_email_invalid": "Please enter a valid email address",
+    "error_password_empty": "Password cannot be empty",
+    "error_password_short": "Password must be at least 6 characters long",
+    "error_name_empty": "Name cannot be empty",
+    "error_enter_digit": "Please enter a digit",
+    "error_one_digit_allowed": "Only one digit allowed",
+    "error_only_digits_allowed": "Only digits allowed"
+}

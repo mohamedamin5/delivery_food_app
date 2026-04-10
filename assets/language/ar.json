@@ -1,0 +1,56 @@
+{
+    "@@locale": "ar",
+    "button_next": "التالي",
+    "button_get_started": "ابدأ الآن",
+    "button_skip": "تخطي",
+    
+    "onboarding_title_1": "كل مفضلاتك",
+    "onboarding_title_2": "اطلب من شيفك المفضل",
+    "onboarding_title_3": "عروض توصيل مجانية",
+    "onboarding_description": "احصل على أطعمتك المفضلة في مكان واحد، ما عليك سوى الطلب ونحن نتولى الباقي",
+
+    "login_title": "تسجيل الدخول",
+    "login_description": "يرجى تسجيل الدخول إلى حسابك الحالي",
+    "signup_title": "إنشاء حساب",
+    "signup_description": "يرجى إنشاء حساب جديد للبدء",
+    
+    "hint_name": "الاسم",
+    "hint_email": "البريد الإلكتروني",
+    "hint_password": "كلمة المرور",
+    "hint_retype_password": "إعادة كتابة كلمة المرور",
+    "search_hint":"بحث",
+
+    
+    "button_login": "تسجيل الدخول",
+    "button_signup": "إنشاء حساب",
+    "text_dont_have_account": "ليس لديك حساب؟",
+    "text_remember_me": "تذكرني",
+    "text_forgot_password": "نسيت كلمة المرور؟",
+
+    "search_placeholder": "بحث",
+    "verification_title": "التحقق",
+    "verification_description": "لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني",
+    "button_send_code": "إرسال الرمز",
+    "button_verify": "تحقق",
+
+    "home_deliver_to": "التوصيل إلى",
+    "home_hey": "أهلاً",
+    "home_good_afternoon": "مساء الخير",
+    "home_all_categories": "جميع الفئات",
+    "home_see_all": "عرض الكل",
+    "home_open_restaurants": "مطاعم مفتوحة الآن",
+
+    "category_all": "الكل",
+    "category_hotdog": "هوت دوغ",
+    "category_burger": "برجر",
+    "category_pizza": "بيتزا",
+
+    "error_email_empty": "حقل البريد الإلكتروني لا يمكن أن يكون فارغاً",
+    "error_email_invalid": "يرجى إدخال بريد إلكتروني صحيح",
+    "error_password_empty": "حقل كلمة المرور لا يمكن أن يكون فارغاً",
+    "error_password_short": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+    "error_name_empty": "حقل الاسم لا يمكن أن يكون فارغاً",
+    "error_enter_digit": "يرجى إدخال رقم",
+    "error_one_digit_allowed": "مسموح برقم واحد فقط",
+    "error_only_digits_allowed": "مسموح بالأرقام فقط"
+}
