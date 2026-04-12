@@ -1,81 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/core/themes/appcolor.dart';
-import 'package:flutter_application_2/core/widget/custom_drop_down_bottom.dart';
-import 'package:flutter_application_2/core/widget/customcirclebutton.dart';
-import 'package:flutter_application_2/features/Home/listrest.dart';
-import 'package:flutter_application_2/features/Home/providers/categorie_selected.dart';
+import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
+import 'package:flutter_application_2/core/ui_essentials.dart';
+import 'package:flutter_application_2/features/Home/presentation/widgets/custom_drop_down_bottom.dart';
 import 'package:flutter_application_2/models/menu_item.dart';
-import 'package:flutter_application_2/models/resttaurant.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CategoryProductsScreen extends ConsumerStatefulWidget {
+class CategoryProductsScreen extends StatefulWidget {
   const CategoryProductsScreen({super.key});
 
   @override
-  ConsumerState<CategoryProductsScreen> createState() =>
-      _CategoryProductsScreenState();
+  State<CategoryProductsScreen> createState() => _CategoryProductsScreenState();
 }
 
-class _CategoryProductsScreenState
-    extends ConsumerState<CategoryProductsScreen> {
+class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   // تحويل البيانات مرة واحدة فقط عند التشغيل وليس في كل Build
-  late final List<Restaurant> _restaurantList;
-
-  @override
-  void initState() {
-    super.initState();
-    _restaurantList = restaurants.map((e) => Restaurant.fromjson(e)).toList();
-  }
 
   // فصل منطق الفلترة في ميثود مستقلة لزيادة المقروئية
-  List<MenuItem> _getFilteredItems(String selectedCategory) {
-    if (selectedCategory == "All") {
-      return _restaurantList
-          .expand((r) => r.categorie.values)
-          .expand((list) => list)
-          .toList();
-    }
-
-    if (selectedCategory == "Other") {
-      return _restaurantList
-          .expand((r) => r.categorie.entries)
-          .where((entry) => !categories.contains(entry.key))
-          .expand((entry) => entry.value)
-          .toList();
-    }
-
-    return _restaurantList
-        .expand((r) => r.categorie.entries)
-        .where((entry) => entry.key == selectedCategory)
-        .expand((entry) => entry.value)
-        .toList();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final selectedCategory = ref.watch(categorySelectedProvider);
-    final allItems = _getFilteredItems(selectedCategory);
-
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              SliverToBoxAdapter(child: _buildHeader(context)),
-              SliverToBoxAdapter(child: SizedBox(height: 20.h)),
-              _buildProductGrid(allItems),
-            ],
+          child: BlocBuilder(
+            builder: (context, state) {
+              if (state is HomeLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is HomeSuccess) {
+                return CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: _buildHeader(context, state.categories),
+                    ),
+                    _buildProductGrid(state.filteredItems),
+                  ],
+                );
+              } else if (state is HomeError) {
+                return Center(child: Text(state.message));
+              }
+              return const SizedBox();
+            },
           ),
         ),
       ),
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
+  Widget _buildHeader(BuildContext context, List<String> allcategorie) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -88,7 +60,7 @@ class _CategoryProductsScreenState
               onTap: () => Navigator.pop(context),
             ),
             SizedBox(width: 8.w),
-            CustomDropDownBottom(allcategorie: categories),
+            CustomDropDownBottom(allcategorie: allcategorie),
           ],
         ),
         _buildHeaderActions(),

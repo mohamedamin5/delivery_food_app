@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
-import 'package:flutter_application_2/core/localization/localprovider.dart';
-import 'package:flutter_application_2/core/providers/localprovider/locale_bloc.dart';
-import 'package:flutter_application_2/core/providers/localprovider/locale_sate.dart';
+import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/screens.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
@@ -18,14 +14,14 @@ void main() {
   );
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  ConsumerState<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends ConsumerState<MyApp> {
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

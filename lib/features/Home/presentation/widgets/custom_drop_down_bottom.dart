@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_application_2/features/Home/providers/categorie_selected.dart';
+import 'package:flutter_application_2/features/Home/logic/widgets_provider/custom_drop_down_bloc/custom_drop_down_bloc_imports.dart';
 
-class CustomDropDownBottom extends ConsumerStatefulWidget {
+class CustomDropDownBottom extends StatefulWidget {
   const CustomDropDownBottom({super.key, required this.allcategorie});
   final List<String> allcategorie;
 
   @override
-  ConsumerState<CustomDropDownBottom> createState() =>
-      _CustomDropDownBottomState();
+  State<CustomDropDownBottom> createState() => _CustomDropDownBottomState();
 }
 
-class _CustomDropDownBottomState extends ConsumerState<CustomDropDownBottom> {
+class _CustomDropDownBottomState extends State<CustomDropDownBottom> {
   OverlayEntry? overlayEntry;
   final LayerLink layerLink = LayerLink();
 
@@ -79,7 +77,7 @@ class _CustomDropDownBottomState extends ConsumerState<CustomDropDownBottom> {
                   width: dropdownWidth,
                   maxHeight: dropdownHeight,
                   onSelect: (item) {
-                    ref.read(categorySelectedProvider.notifier).state = item;
+                    context.read<DropDownBloc>().add(DropDownSelectEvent(item));
                     _removeOverlay();
                   },
                   onDismiss: _removeOverlay,
@@ -95,8 +93,6 @@ class _CustomDropDownBottomState extends ConsumerState<CustomDropDownBottom> {
 
   @override
   Widget build(BuildContext context) {
-    final selected = ref.watch(categorySelectedProvider);
-
     return NotificationListener<ScrollNotification>(
       onNotification: (_) {
         if (overlayEntry != null) {
@@ -119,11 +115,13 @@ class _CustomDropDownBottomState extends ConsumerState<CustomDropDownBottom> {
               children: [
                 const Icon(Icons.arrow_drop_down, color: Color(0xFFFF7622)),
                 const SizedBox(width: 4),
-                Text(
-                  selected.isEmpty ? "Select" : selected,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
+                BlocBuilder<DropDownBloc, DropDownState>(
+                  builder: (context, state) => Text(
+                    state.selectedCategorie,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/features/cart/screens/cart_screen.dart';
-import 'package:flutter_application_2/features/Home/screens/home_screen.dart';
+import 'package:flutter_application_2/features/Home/presentation/screens/home_screen.dart';
 import 'package:flutter_application_2/features/profile/screens/profile_screen.dart';
-import 'package:flutter_application_2/features/Home/screens/search_screen.dart';
+import 'package:flutter_application_2/features/Home/presentation/screens/search_screen.dart';
 import 'package:flutter_application_2/features/sitting/screens/sittings_screen.dart';
 
 class Home extends StatefulWidget {
