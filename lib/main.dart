@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/approute.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/blocs_imports.dart';
-import 'package:flutter_application_2/core/providers/localprovider/locale_event.dart';
 import 'package:flutter_application_2/screens.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,20 +34,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return BlocBuilder<LocaleBloc, LocaleState>(
           builder: (context, state) => MaterialApp(
-            routes: {
-              "/addcardscreen": (context) => const AddCardScreen(),
-              "/paymentscreen": (context) => const PaymentScreen(),
-              "/cartscreen": (context) => const CartScreen(),
-              "/productDetails": (context) => const ProductDetails(),
-              "/restaurantDetails": (context) => const ResterabtDetails(),
-              "/login": (context) => const Loginscreen(),
-              "/onboarding": (context) => const Ondoarding(),
-              "/forgot_password": (context) => const ForgotPasswordScreen(),
-              "/verification": (context) => const VerificationScreen(),
-              "/signup": (context) => const SingUpScreen(),
-              "/categorie": (context) => const CategoryProductsScreen(),
-              "/home": (context) => const HomeScreen(),
-            },
+            onGenerateRoute: Approute().onGenerateRoute,
             supportedLocales: [const Locale('en'), const Locale('ar')],
             locale: state.locale,
             localizationsDelegates: [
