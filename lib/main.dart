@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/providers/localprovider/locale_event.dart';
 import 'package:flutter_application_2/screens.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
+  final localeBloc = LocaleBloc();
+  localeBloc.add(LoadSystemLocaleEvent());
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider<LocaleBloc>(create: (context) => LocaleBloc())],
+      providers: [BlocProvider<LocaleBloc>(create: (context) => localeBloc)],
       child: const MyApp(),
     ),
   );
@@ -55,7 +58,7 @@ class _MyAppState extends State<MyApp> {
             ],
 
             theme: ThemeData(primarySwatch: Colors.blue),
-            home: const AddCardScreen(),
+            home: const Loginscreen(),
           ),
         );
       },

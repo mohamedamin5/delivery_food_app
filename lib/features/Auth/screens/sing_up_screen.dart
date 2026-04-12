@@ -102,6 +102,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30.h),
             _buildFieldLabel(appLocalizations.translate('hint_name')),

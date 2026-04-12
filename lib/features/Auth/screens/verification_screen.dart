@@ -46,6 +46,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Stack(
                   children: [

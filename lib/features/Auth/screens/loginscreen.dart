@@ -95,6 +95,7 @@ class _LoginscreenState extends State<Loginscreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 30.h),
               _buildFieldLabel(appLocalizations.translate('hint_email')),

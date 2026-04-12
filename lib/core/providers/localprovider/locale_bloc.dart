@@ -7,7 +7,10 @@ class LocaleBloc extends Bloc<LocaleEvent, LocaleState> {
   LocaleBloc() : super(const LocaleSet(Locale('en'))) {
     on<LoadSystemLocaleEvent>((event, emit) {
       final systemLocale = PlatformDispatcher.instance.locale;
-      emit(LocaleSet(Locale(systemLocale.languageCode)));
+      final languageCode = systemLocale.languageCode.isNotEmpty 
+        ? systemLocale.languageCode 
+        : 'en';
+      emit(LocaleSet(Locale(languageCode)));
     });
 
     on<ChangeLocaleEvent>((event, emit) {
