@@ -20,18 +20,11 @@ class _SingUpScreenState extends State<SingUpScreen> {
     return Scaffold(
       backgroundColor: AppColors.mainBackground,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: Column(
-              children: [
-                _buildHeader(appLocalizations),
-                _buildSignUpForm(appLocalizations),
-                SizedBox(height: 20.h),
-                _buildLoginRedirect(appLocalizations),
-              ],
-            ),
-          ),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: _buildHeader(appLocalizations)),
+            SliverToBoxAdapter(child: _buildSignUpForm(appLocalizations)),
+          ],
         ),
       ),
     );
@@ -179,6 +172,9 @@ class _SingUpScreenState extends State<SingUpScreen> {
               },
               height: 62.h,
             ),
+            SizedBox(height: 20.h),
+            _buildLoginRedirect(appLocalizations),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

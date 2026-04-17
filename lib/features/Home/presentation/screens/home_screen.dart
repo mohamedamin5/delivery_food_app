@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/ui_essentials.dart';
-import 'package:flutter_application_2/features/Home/listrest.dart';
 import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
 import 'package:flutter_application_2/features/Home/logic/widgets_provider/custom_drop_down_bloc/custom_drop_down_bloc_imports.dart';
 
@@ -20,10 +19,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsetsGeometry.symmetric(horizontal: 12.w),
-          child: BlocBuilder(
+          child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               if (state is HomeLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 7,
+                    backgroundColor: AppColors.mainBackground,
+                    color: AppColors.primary,
+                    strokeCap: StrokeCap.round,
+                  ),
+                );
               } else if (state is HomeSuccess) {
                 return CustomScrollView(
                   slivers: [
@@ -61,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           SizedBox(height: 20.h),
-                          _buildCategoryList(),
+                          _buildCategoryList(context, state.categories),
                           SizedBox(height: 10.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -233,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCategoryList() {
+  Widget _buildCategoryList(BuildContext context, List<String> categories) {
     return SizedBox(
       height: 60.h,
       child: ListView.builder(

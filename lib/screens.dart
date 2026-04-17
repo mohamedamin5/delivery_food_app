@@ -4,10 +4,11 @@ export 'package:flutter_application_2/features/Auth/presentation/screens/sing_up
 export 'package:flutter_application_2/features/Auth/presentation/screens/verification_screen.dart';
 export 'package:flutter_application_2/features/Home/presentation/screens/categoryproductsscreen.dart';
 export 'package:flutter_application_2/features/Home/presentation/screens/home_screen.dart';
-export 'package:flutter_application_2/features/Home/presentation/screens/product_details.dart';
+export 'package:flutter_application_2/features/product/presentation/product_details.dart';
 export 'package:flutter_application_2/features/Home/presentation/screens/resterabt_details.dart';
 export 'package:flutter_application_2/features/cart/presetation/screens/cart_screen.dart';
 export 'package:flutter_application_2/features/onboarding/screens/ondoarding.dart';
 export 'package:flutter_application_2/features/payment/presentation/screens/payment_screen.dart';
 export 'package:flutter_application_2/features/payment/presentation/screens/add_card_screen.dart';
 export 'package:flutter_application_2/features/splashscreens/splashscreen.dart';
+export 'package:flutter_application_2/features/track/presentation/screens/tracking_order_screen.dart';

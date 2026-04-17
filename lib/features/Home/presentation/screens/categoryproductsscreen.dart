@@ -23,7 +23,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: BlocBuilder(
+          child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               if (state is HomeLoading) {
                 return const Center(child: CircularProgressIndicator());

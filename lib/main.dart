@@ -42,10 +42,8 @@ class _MyAppState extends State<MyApp> {
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
-            ],
-
-            theme: ThemeData(primarySwatch: Colors.blue),
-            home: const Loginscreen(),
+            ], 
+            home: const TrackingOrderScreen(),
           ),
         );
       },
