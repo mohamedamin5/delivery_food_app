@@ -12,6 +12,7 @@ class TrackingOrderScreen extends StatefulWidget {
 class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
   @override
   Widget build(BuildContext context) {
+    final applocalizations = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Stack(
@@ -22,7 +23,7 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
             child: CustomCircleButton(
               size: 45,
               bgColor: AppColors.mainBackground,
-              icon: Icon(Icons.arrow_back_ios_new),
+              icon: Icon(Icons.arrow_back_ios_new, color: AppColors.white),
             ),
           ),
 
@@ -35,8 +36,199 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
           ),
           AppDraggableSheet(
             children: [
-              Container(color: Colors.white, height: 100.h, width: 100.w),
+              _buildOrderHeader(),
+              SizedBox(height: 29.h),
+              _buildDeliveryEstimation(),
+              SizedBox(height: 36.5.h),
+              _buildOrderTimeline(),
+              SizedBox(height: 30.h),
+              _buildCourierCard(),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOrderHeader() {
+    return Row(
+      children: [
+        Container(
+          width: 63.w,
+          height: 53.h,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+        ),
+        SizedBox(width: 10.w),
+        Column(
+          children: [
+            Text(
+              "Uttora Coffee House",
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
+            ),
+            SizedBox(width: 10.w),
+            Text(
+              "Orderd at 06 Sept, 10:00pm",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDeliveryEstimation() {
+    return Column(
+      children: [
+        SizedBox(height: 16.h),
+        Text(
+          "20 min",
+          style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "Estimated delivery time",
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildOrderTimeline() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            CustomCircleButton(
+              size: 17,
+              bgColor: AppColors.backgroundGry,
+              icon: Icon(Icons.check, size: 15.sp),
+            ),
+            SizedBox(width: 12.82.w),
+            Text(
+              "Your order has been received",
+              style: TextStyle(
+                color: AppColors.backgroundGry,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 32.h),
+        Row(
+          children: [
+            CustomCircleButton(
+              size: 17,
+              bgColor: AppColors.backgroundGry,
+              icon: Icon(Icons.check, size: 15.sp),
+            ),
+            SizedBox(width: 12.82.w),
+            Text(
+              "The restaurant is preparing your food",
+              style: TextStyle(
+                color: AppColors.backgroundGry,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 32.h),
+        Row(
+          children: [
+            CustomCircleButton(
+              size: 17,
+              bgColor: AppColors.backgroundGry,
+              icon: Icon(Icons.check, size: 15.sp),
+            ),
+            SizedBox(width: 12.82.w),
+            Text(
+              "Your order has been picked up for delivery",
+              style: TextStyle(
+                color: AppColors.backgroundGry,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 32.h),
+        Row(
+          children: [
+            CustomCircleButton(
+              size: 17,
+              bgColor: AppColors.backgroundGry,
+              icon: Icon(Icons.check, size: 15.sp),
+            ),
+            SizedBox(width: 12.82.w),
+            Text(
+              "Order arriving soon!",
+              style: TextStyle(
+                color: AppColors.backgroundGry,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCourierCard() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      height: 116.h,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomCircleButton(
+            bgColor: AppColors.backgroundGry,
+            icon: SizedBox.shrink(),
+            size: 54,
+          ),
+          SizedBox(width: 11.w),
+          Column(
+            children: [
+              Text(
+                "Robert F.",
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black,
+                ),
+              ),
+              SizedBox(height: 5.h),
+              Text(
+                "Courier",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.backgroundGry,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 50.w),
+          CustomCircleButton(
+            bgColor: AppColors.primary,
+            icon: Icon(Icons.call_outlined, color: AppColors.white),
+            size: 45,
+          ),
+          SizedBox(width: 15.w),
+          CustomCircleButton(
+            bgColor: AppColors.white,
+            icon: Icon(Icons.message_outlined, color: AppColors.primary),
+            size: 45,
           ),
         ],
       ),

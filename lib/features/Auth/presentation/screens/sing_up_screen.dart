@@ -185,7 +185,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(appLocalizations.translate('already_have_account')),
+        Text(appLocalizations.translate('text_already_have_account')),
         SizedBox(width: 4.w),
         GestureDetector(
           onTap: () {

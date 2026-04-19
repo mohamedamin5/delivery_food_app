@@ -24,6 +24,7 @@
     "button_login": "تسجيل الدخول",
     "button_signup": "إنشاء حساب",
     "text_dont_have_account": "ليس لديك حساب؟",
+    "text_already_have_account":"هل لديك حساب بالفعل?",
     "text_remember_me": "تذكرني",
     "text_forgot_password": "نسيت كلمة المرور؟",
 
@@ -52,5 +53,26 @@
     "error_name_empty": "حقل الاسم لا يمكن أن يكون فارغاً",
     "error_enter_digit": "يرجى إدخال رقم",
     "error_one_digit_allowed": "مسموح برقم واحد فقط",
-    "error_only_digits_allowed": "مسموح بالأرقام فقط"
+    "error_only_digits_allowed": "مسموح بالأرقام فقط",
+
+
+
+
+    "Text_cart":"سلة التسوق",
+    "text_edit_items":"تعديل العناصر",
+    "Text_item_name":"اسم العنصر",
+    "Text_delivery_address":"عنوان التوصيل",
+    "text_edit":"تعديل",
+    "text_total":"المجموع",
+    "text_breakdown":"التقسيم",
+    "text_place_order":"تقديم الطلب",
+    "hint_enter_delivery_address":"أدخل عنوان التوصيل",
+
+    "button_add_card":"إضافة بطاقة",
+    "Text_card_holder_name":"اسم حامل البطاقة",
+    "button_add_make_payment":"إضافة ودفع"
+
+
+
+
 }

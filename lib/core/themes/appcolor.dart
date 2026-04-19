@@ -13,5 +13,7 @@ abstract class AppColors {
 
   static const Color secondaryAction = Color(0xFF121223);
 
+  static const Color backgroundGry = Colors.grey;
+
   static const Color cardBackground = Color(0xFFECF0F4);
 }

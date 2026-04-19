@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
-import 'package:flutter_application_2/core/widget/customcirclebutton.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_application_2/core/ui_essentials.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -14,6 +12,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    final applocalizations = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: AppColors.mainBackground,
       body: SafeArea(
@@ -27,14 +26,14 @@ class _CartScreenState extends State<CartScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: 50.h),
-                      _buildTopAppBar(),
+                      _buildTopAppBar(applocalizations!),
                       SizedBox(height: 24.h),
-                      Expanded(child: _buildCartList()),
+                      Expanded(child: _buildCartList(applocalizations)),
                     ],
                   ),
                 ),
               ),
-              _buildFooter(),
+              _buildFooter(applocalizations),
             ],
           ),
         ),
@@ -42,7 +41,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget _buildTopAppBar() {
+  Widget _buildTopAppBar(AppLocalizations applocalizations) {
     return Row(
       children: [
         Row(
@@ -55,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
             SizedBox(width: 18.w),
             Text(
-              'Cart',
+              applocalizations.translate("Text_cart"),
               style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w400),
             ),
           ],
@@ -64,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
         TextButton(
           onPressed: () {},
           child: Text(
-            'EDIT ITEMS',
+            applocalizations.translate("text_edit_items"),
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w400,
@@ -76,7 +75,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget _buildCartItem() {
+  Widget _buildCartItem(AppLocalizations applocalizations) {
     return Container(
       padding: EdgeInsets.all(12.h),
       margin: EdgeInsets.only(bottom: 12.h),
@@ -99,7 +98,7 @@ class _CartScreenState extends State<CartScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Item Name',
+                applocalizations.translate("Text_item_name"),
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
@@ -125,14 +124,14 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget _buildCartList() {
+  Widget _buildCartList(AppLocalizations applocalizations) {
     return ListView.builder(
       itemCount: 5, // عدد العناصر في الكارت
-      itemBuilder: (context, index) => _buildCartItem(),
+      itemBuilder: (context, index) => _buildCartItem(applocalizations),
     );
   }
 
-  Widget _buildFooter() {
+  Widget _buildFooter(AppLocalizations applocalizations) {
     return Container(
       height: 310.h,
       width: double.infinity,
@@ -150,7 +149,7 @@ class _CartScreenState extends State<CartScreen> {
             Row(
               children: [
                 Text(
-                  'Delivery ADDRESS',
+                  applocalizations.translate("Text_delivery_address"),
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -160,7 +159,7 @@ class _CartScreenState extends State<CartScreen> {
                 TextButton(
                   onPressed: () {},
                   child: Text(
-                    'EDIT',
+                    applocalizations.translate("text_edit"),
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
@@ -171,14 +170,14 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
             SizedBox(height: 10.h),
-            _buildAddressField(),
+            _buildAddressField(applocalizations),
             SizedBox(height: 30.h),
             Row(
               children: [
                 Row(
                   children: [
                     Text(
-                      'TOTAL:',
+                      applocalizations.translate("text_total"),
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
@@ -197,7 +196,7 @@ class _CartScreenState extends State<CartScreen> {
 
                 const Spacer(),
                 Text(
-                  'breakdown >',
+                  applocalizations.translate("text_breakdown"),
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -206,7 +205,11 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
 
-            AppButton(text: "Place ORder", onTap: () {}, height: 62.h),
+            AppButton(
+              text: applocalizations.translate("text_place_order"),
+              onTap: () {},
+              height: 62.h,
+            ),
             SizedBox(height: 30.h),
           ],
         ),
@@ -214,10 +217,10 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget _buildAddressField() {
+  Widget _buildAddressField(AppLocalizations applocalizations) {
     return TextField(
       decoration: InputDecoration(
-        hintText: 'Enter delivery address',
+        hintText: applocalizations.translate("hint_enter_delivery_address"),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
       ),
     );

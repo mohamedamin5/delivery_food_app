@@ -12,7 +12,7 @@ class AppDraggableSheet extends StatelessWidget {
     required this.children,
     this.initialChildSize = 0.3,
     this.minChildSize = 0.2,
-    this.maxChildSize = 0.9,
+    this.maxChildSize = 0.7,
   });
 
   @override

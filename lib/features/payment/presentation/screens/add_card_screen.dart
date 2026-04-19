@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/widget/customcirclebutton.dart';
 import '../widgets/card_number_input.dart'; // الملف الذي شرحناه سابقاً
+import 'package:flutter_application_2/core/ui_essentials.dart';
 
 class AddCardScreen extends StatelessWidget {
   const AddCardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -18,21 +18,18 @@ class AddCardScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h),
-              _buildAppBar(context),
+              _buildAppBar(context, appLocalizations),
               SizedBox(height: 30.h),
 
-              // 1. حقل اسم صاحب البطاقة
-              _buildLabel("CARD HOLDER NAME"),
+              _buildLabel(appLocalizations.translate("Text_card_holder_name")),
               _buildCustomTextField(hint: "Vishal Khadok"),
 
               SizedBox(height: 24.h),
 
-              // 2. حقل رقم البطاقة (الذي فصلناه في ملف مستقل)
               const CardNumberInput(),
 
               SizedBox(height: 24.h),
 
-              // 3. صف التاريخ والـ CVC
               Row(
                 children: [
                   Expanded(
@@ -57,7 +54,11 @@ class AddCardScreen extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              AppButton(text: 'Add & Make Payment', onTap: () {}, height: 62.h),
+              AppButton(
+                text: appLocalizations.translate("button_add_make_payment"),
+                onTap: () {},
+                height: 62.h,
+              ),
               SizedBox(height: 34.h),
             ],
           ),
@@ -104,7 +105,7 @@ class AddCardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
+  Widget _buildAppBar(BuildContext context, AppLocalizations appLocalizations) {
     return Row(
       children: [
         CustomCircleButton(
@@ -115,7 +116,7 @@ class AddCardScreen extends StatelessWidget {
         ),
         SizedBox(width: 16.w),
         Text(
-          "Add Card",
+          appLocalizations.translate("button_add_card"),
           style: TextStyle(
             fontSize: 17.sp,
             fontWeight: FontWeight.w500,
