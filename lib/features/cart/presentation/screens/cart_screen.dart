@@ -14,7 +14,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     final applocalizations = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: AppColors.mainBackground,
+      backgroundColor: AppColors.dark,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -48,7 +48,7 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             CustomCircleButton(
               size: 45,
-              bgColor: AppColors.cardBackground,
+              bgColor: AppColors.dark,
               icon: Icon(Icons.arrow_back_ios_new, size: 18.sp),
               onTap: () => Navigator.pop(context),
             ),
@@ -80,7 +80,7 @@ class _CartScreenState extends State<CartScreen> {
       padding: EdgeInsets.all(12.h),
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
-        color: AppColors.mainBackground,
+        color: AppColors.dark,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
@@ -89,7 +89,7 @@ class _CartScreenState extends State<CartScreen> {
             width: 80.w,
             height: 80.h,
             decoration: BoxDecoration(
-              color: AppColors.cardBackground,
+              color: AppColors.greyText,
               borderRadius: BorderRadius.circular(8.r),
             ),
           ),

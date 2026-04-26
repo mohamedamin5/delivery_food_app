@@ -42,7 +42,7 @@ class OtpTextField extends StatelessWidget {
         maxLength: 1,
         decoration: const InputDecoration(
           filled: true,
-          fillColor: AppColors.backgroundLight,
+          fillColor: AppColors.greyText,
           counterText: '',
           border: OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(

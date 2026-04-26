@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return const Center(
                   child: CircularProgressIndicator(
                     strokeWidth: 7,
-                    backgroundColor: AppColors.mainBackground,
+                    backgroundColor: AppColors.dark,
                     color: AppColors.primary,
                     strokeCap: StrokeCap.round,
                   ),
@@ -198,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CustomCircleButton(
               size: 46,
-              bgColor: AppColors.cardBackground,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.menu),
             ),
             Column(
@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Stack(
           children: [
             CustomCircleButton(
-              bgColor: AppColors.secondaryAction,
+              bgColor: AppColors.dark,
               icon: Icon(Icons.shopping_cart_outlined, color: AppColors.white),
             ),
             Positioned(

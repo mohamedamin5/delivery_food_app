@@ -18,7 +18,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.mainBackground,
+      backgroundColor: AppColors.dark,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -36,7 +36,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
         Container(
           height: 233.h,
           width: double.infinity,
-          decoration: const BoxDecoration(color: AppColors.mainBackground),
+          decoration: const BoxDecoration(color: AppColors.dark),
           child: Column(
             children: [
               SizedBox(height: 20.h),

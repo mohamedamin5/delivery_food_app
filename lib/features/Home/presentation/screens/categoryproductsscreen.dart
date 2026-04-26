@@ -55,7 +55,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
           children: [
             CustomCircleButton(
               size: 45,
-              bgColor: AppColors.cardBackground,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.arrow_back_ios_new, size: 18.sp),
               onTap: () => Navigator.pop(context),
             ),
@@ -73,14 +73,14 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
       children: [
         CustomCircleButton(
           size: 46,
-          bgColor: AppColors.secondaryAction,
+          bgColor: AppColors.dark,
           icon: const Icon(Icons.search, color: Colors.white),
           onTap: () {},
         ),
         SizedBox(width: 10.w),
         CustomCircleButton(
           size: 46,
-          bgColor: AppColors.cardBackground,
+          bgColor: AppColors.greyText,
           icon: const Icon(Icons.tune_sharp),
           onTap: () {},
         ),

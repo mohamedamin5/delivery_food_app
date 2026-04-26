@@ -40,7 +40,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.mainBackground,
+      backgroundColor: AppColors.dark,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -133,8 +133,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
       top: 40.h,
       left: 10.h,
       child: CustomCircleButton(
-        bgColor: AppColors.backgroundLight,
-        icon: Icon(Icons.arrow_back, color: AppColors.black),
+        bgColor: AppColors.dark,
+        icon: Icon(Icons.arrow_back, color: AppColors.white),
         onTap: () {
           Navigator.pop(context);
         },

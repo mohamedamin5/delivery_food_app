@@ -22,7 +22,7 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
             left: 24.w,
             child: CustomCircleButton(
               size: 45,
-              bgColor: AppColors.mainBackground,
+              bgColor: AppColors.dark,
               icon: Icon(Icons.arrow_back_ios_new, color: AppColors.white),
             ),
           ),
@@ -106,14 +106,14 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
           children: [
             CustomCircleButton(
               size: 17,
-              bgColor: AppColors.backgroundGry,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.check, size: 15.sp),
             ),
             SizedBox(width: 12.82.w),
             Text(
               "Your order has been received",
               style: TextStyle(
-                color: AppColors.backgroundGry,
+                color: AppColors.greyText,
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
               ),
@@ -125,14 +125,14 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
           children: [
             CustomCircleButton(
               size: 17,
-              bgColor: AppColors.backgroundGry,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.check, size: 15.sp),
             ),
             SizedBox(width: 12.82.w),
             Text(
               "The restaurant is preparing your food",
               style: TextStyle(
-                color: AppColors.backgroundGry,
+                color: AppColors.greyText,
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
               ),
@@ -144,14 +144,14 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
           children: [
             CustomCircleButton(
               size: 17,
-              bgColor: AppColors.backgroundGry,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.check, size: 15.sp),
             ),
             SizedBox(width: 12.82.w),
             Text(
               "Your order has been picked up for delivery",
               style: TextStyle(
-                color: AppColors.backgroundGry,
+                color: AppColors.greyText,
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
               ),
@@ -163,14 +163,14 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
           children: [
             CustomCircleButton(
               size: 17,
-              bgColor: AppColors.backgroundGry,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.check, size: 15.sp),
             ),
             SizedBox(width: 12.82.w),
             Text(
               "Order arriving soon!",
               style: TextStyle(
-                color: AppColors.backgroundGry,
+                color: AppColors.greyText,
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
               ),
@@ -192,7 +192,7 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomCircleButton(
-            bgColor: AppColors.backgroundGry,
+            bgColor: AppColors.greyText,
             icon: SizedBox.shrink(),
             size: 54,
           ),
@@ -213,7 +213,7 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.backgroundGry,
+                  color: AppColors.greyText,
                 ),
               ),
             ],

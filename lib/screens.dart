@@ -12,3 +12,6 @@ export 'package:flutter_application_2/features/payment/presentation/screens/paym
 export 'package:flutter_application_2/features/payment/presentation/screens/add_card_screen.dart';
 export 'package:flutter_application_2/features/splashscreens/splashscreen.dart';
 export 'package:flutter_application_2/features/track/presentation/screens/tracking_order_screen.dart';
+export 'package:flutter_application_2/features/chat/presentation/screens/chat_view.dart';
+export 'package:flutter_application_2/features/setting/presentation/screens/setting_screen.dart';
+export 'package:flutter_application_2/features/orders/presentation/screens/my_orders_screen.dart';

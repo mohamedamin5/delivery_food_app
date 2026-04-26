@@ -32,7 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         children: [
                           CustomCircleButton(
                             size: 45,
-                            bgColor: AppColors.cardBackground,
+                            bgColor: AppColors.greyText,
                             icon: Icon(Icons.arrow_back_ios_new),
                             onTap: () {
                               Navigator.pop(context);

@@ -46,7 +46,7 @@ class PaymentScreen extends StatelessWidget {
       children: [
         CustomCircleButton(
           size: 45,
-          bgColor: AppColors.cardBackground,
+          bgColor: AppColors.greyText,
           icon: Icon(
             Icons.arrow_back_ios_new_outlined,
             color: AppColors.black,
@@ -62,7 +62,7 @@ class PaymentScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 17.sp,
             fontWeight: FontWeight.w400,
-            color: AppColors.secondaryAction,
+            color: AppColors.dark,
           ),
         ),
       ],

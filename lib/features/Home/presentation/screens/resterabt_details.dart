@@ -101,7 +101,7 @@ class _ResterabtDetailsState extends State<ResterabtDetails> {
             CustomCircleButton(
               onTap: () => Navigator.pop(context),
               size: 45,
-              bgColor: AppColors.cardBackground,
+              bgColor: AppColors.greyText,
               icon: Icon(Icons.arrow_back_ios),
             ),
             SizedBox(width: 12.w),
