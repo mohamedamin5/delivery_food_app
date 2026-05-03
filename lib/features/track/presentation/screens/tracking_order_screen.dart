@@ -12,7 +12,6 @@ class TrackingOrderScreen extends StatefulWidget {
 class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
   @override
   Widget build(BuildContext context) {
-    final applocalizations = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Stack(

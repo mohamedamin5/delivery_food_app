@@ -1,3 +1,6 @@
+import 'package:flutter_application_2/core/id/service_locator.dart';
+import 'package:flutter_application_2/features/Auth/data/auth_repository.dart';
+import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
 import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
 import 'package:flutter_application_2/screens.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +12,23 @@ class Approute {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => HomeBloc(),
-            child: HomeScreen(),
+            child: const HomeScreen(),
           ),
         );
       case "/signup":
-        return MaterialPageRoute(builder: (context) => const SingUpScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(locator<AuthRepository>()),
+            child: const SingUpScreen(),
+          ),
+        );
       case "/login":
-        return MaterialPageRoute(builder: (context) => const Loginscreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(locator<AuthRepository>()),
+            child: const Loginscreen(),
+          ),
+        );
       case "/onboarding":
         return MaterialPageRoute(builder: (context) => const Ondoarding());
       case "/forgot_password":
