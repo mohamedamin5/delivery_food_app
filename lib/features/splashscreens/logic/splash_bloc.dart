@@ -1,12 +1,12 @@
 import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/core/services/jwt_service.dart';
-import 'package:flutter_application_2/core/services/storage_service.dart';
+import 'package:flutter_application_2/core/data/data_source/secure_storage_data_source.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_event.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_state.dart';
 
 //user
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  final StorageService _storage;
+  final SecureStorageDataSource _storage;
   final JwtService jwt = JwtService();
   SplashBloc(this._storage) : super(SplashInitial()) {
     on<AppStarted>((event, emit) async {

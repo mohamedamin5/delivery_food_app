@@ -1,9 +1,9 @@
-import 'package:flutter_application_2/core/services/storage_service.dart';
+import 'package:flutter_application_2/core/data/data_source/secure_storage_data_source.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class SecureStorageImpl implements StorageService {
+class SecureStorageDataSourceImpl implements SecureStorageDataSource {
   final FlutterSecureStorage _storage;
-  SecureStorageImpl(this._storage);
+  SecureStorageDataSourceImpl(this._storage);
 
   @override
   Future<void> delete(String key) async {

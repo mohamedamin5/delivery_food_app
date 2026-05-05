@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/network/dio_consumer.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
-import 'package:flutter_application_2/core/services/secure_storage_impl.dart';
+import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceImpl.dart';
 import 'package:flutter_application_2/features/Auth/data/auth_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -13,14 +15,22 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<FlutterSecureStorage>(
     () => FlutterSecureStorage(),
   );
+  final sharedPreferences = await SharedPreferences.getInstance();
+  locator.registerSingleton<SharedPreferences>(sharedPreferences);
 
   locator.registerLazySingleton<IApiConsumer>(
     () => DioConsumer(locator<Dio>()),
   );
-  locator.registerLazySingleton<SecureStorageImpl>(
-    () => SecureStorageImpl(locator<FlutterSecureStorage>()),
+  locator.registerLazySingleton<SecureStorageDataSourceImpl>(
+    () => SecureStorageDataSourceImpl(locator<FlutterSecureStorage>()),
+  );
+  locator.registerLazySingleton<AppLocalDataSourceImpl>(
+    () => AppLocalDataSourceImpl(locator<SharedPreferences>()),
   );
   locator.registerLazySingleton<AuthRepository>(
-    () => AuthRepository(locator<IApiConsumer>(), locator<SecureStorageImpl>()),
+    () => AuthRepository(
+      locator<IApiConsumer>(),
+      locator<SecureStorageDataSourceImpl>(),
+    ),
   );
 }

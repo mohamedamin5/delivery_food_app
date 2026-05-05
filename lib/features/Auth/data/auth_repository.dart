@@ -1,10 +1,10 @@
 import 'package:flutter_application_2/core/network/api_endpoints.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
-import 'package:flutter_application_2/core/services/storage_service.dart';
+import 'package:flutter_application_2/core/data/data_source/secure_storage_data_source.dart';
 
 class AuthRepository {
   final IApiConsumer api;
-  final StorageService storage;
+  final SecureStorageDataSource storage;
   AuthRepository(this.api, this.storage);
 
   Future<String> login(String email, String password) async {
