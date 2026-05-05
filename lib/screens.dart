@@ -10,7 +10,7 @@ export 'package:flutter_application_2/features/cart/presentation/screens/cart_sc
 export 'package:flutter_application_2/features/onboarding/screens/ondoarding.dart';
 export 'package:flutter_application_2/features/payment/presentation/screens/payment_screen.dart';
 export 'package:flutter_application_2/features/payment/presentation/screens/add_card_screen.dart';
-export 'package:flutter_application_2/features/splashscreens/splashscreen.dart';
+export 'package:flutter_application_2/features/splashscreens/screen/splashscreen.dart';
 export 'package:flutter_application_2/features/track/presentation/screens/tracking_order_screen.dart';
 export 'package:flutter_application_2/features/chat/presentation/screens/chat_view.dart';
 export 'package:flutter_application_2/features/setting/presentation/screens/setting_screen.dart';

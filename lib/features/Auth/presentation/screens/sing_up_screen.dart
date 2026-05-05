@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
 import 'package:flutter_application_2/core/widget/app_text_field.dart';
 import 'package:flutter_application_2/core/widget/custom_arroe_back_icon.dart';
+import 'package:flutter_application_2/features/Auth/logic/aut_event.dart';
+import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
+import 'package:flutter_application_2/features/Auth/logic/auth_state.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingUpScreen extends StatefulWidget {
@@ -14,9 +18,40 @@ class SingUpScreen extends StatefulWidget {
 }
 
 class _SingUpScreenState extends State<SingUpScreen> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController retypePasswordController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
+    BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthLoading) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 7,
+                backgroundColor: AppColors.dark,
+                color: AppColors.primary,
+                strokeCap: StrokeCap.round,
+              ),
+            ),
+          );
+        } else if (state is AuthSeccess) {
+          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, "/home");
+        } else if (state is AuthFailure) {
+          Navigator.pop(context);
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error)));
+        }
+      },
+    );
     return Scaffold(
       backgroundColor: AppColors.dark,
       body: SafeArea(
@@ -101,6 +136,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             _buildFieldLabel(appLocalizations.translate('hint_name')),
             SizedBox(height: 10.h),
             AppTextField(
+              controller: nameController,
               hintText: "John Doe",
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -113,6 +149,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             _buildFieldLabel(appLocalizations.translate('hint_email')),
             SizedBox(height: 10.h),
             AppTextField(
+              controller: emailController,
               hintText: "example@example.com",
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -128,6 +165,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             _buildFieldLabel(appLocalizations.translate('hint_password')),
             SizedBox(height: 10.h),
             AppTextField(
+              controller: passwordController,
               hintText: "********",
               isPassword: true,
               validator: (String? value) {
@@ -146,6 +184,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             ),
             SizedBox(height: 10.h),
             AppTextField(
+              controller: retypePasswordController,
               hintText: "********",
               isPassword: true,
               validator: (String? value) {
@@ -164,10 +203,13 @@ class _SingUpScreenState extends State<SingUpScreen> {
             AppButton(
               text: appLocalizations.translate('button_signup'),
               onTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  "/home",
-                  (route) => false,
+                context.read().add(
+                  RegisterRequested(
+                    nameController.text,
+                    passwordController.text,
+                    emailController.text,
+                    retypePasswordController.text,
+                  ),
                 );
               },
               height: 62.h,

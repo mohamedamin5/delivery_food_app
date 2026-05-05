@@ -6,20 +6,18 @@ class SecureStorageImpl implements StorageService {
   SecureStorageImpl(this._storage);
 
   @override
-  Future<void> delete(String key) {
-    _storage.delete(key: key);
-    throw UnimplementedError();
+  Future<void> delete(String key) async {
+    await _storage.delete(key: key);
   }
 
   @override
-  Future<String?> read(String key) {
-    _storage.read(key: key);
-    throw UnimplementedError();
+  Future<String?> read(String key) async {
+    final value = await _storage.read(key: key);
+    return value;
   }
 
   @override
-  Future<void> save(String key, String value) {
-    _storage.write(key: key, value: value);
-    throw UnimplementedError();
+  Future<void> save(String key, String value) async {
+    await _storage.write(key: key, value: value);
   }
 }

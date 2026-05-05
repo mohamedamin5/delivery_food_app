@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
+import 'package:flutter_application_2/features/splashscreens/logic/splash_event.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -10,11 +13,7 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(Duration(seconds: 3), () {
-        Navigator.pushReplacementNamed(context, '/onboarding');
-      });
-    });
+    context.read<SplashBloc>().add(AppStarted());
     super.initState();
   }
 

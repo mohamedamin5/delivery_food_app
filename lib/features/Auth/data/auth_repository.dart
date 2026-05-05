@@ -32,7 +32,7 @@ class AuthRepository {
     String username,
     String password,
     String email,
-    String phone,
+    String retype_password,
   ) async {
     try {
       final response = await api.post(
@@ -41,7 +41,7 @@ class AuthRepository {
           'username': username,
           'password': password,
           'email': email,
-          'phone': phone,
+          'phone': retype_password,
         },
       );
       if (response["access_token"] != null &&

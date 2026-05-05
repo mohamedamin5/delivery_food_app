@@ -13,6 +13,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
@@ -87,6 +88,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       Text(appLocalizations.translate('hint_email')),
                       SizedBox(height: 10.h),
                       AppTextField(
+                        controller: emailController,
                         hintText: "example@example.com",
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {

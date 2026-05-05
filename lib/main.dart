@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/approute.dart';
+import 'package:flutter_application_2/core/id/service_locator.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/services/secure_storage_impl.dart';
+import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
 import 'package:flutter_application_2/screens.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,7 +47,10 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: MyOrdersScreen(),
+            home: BlocProvider(
+              create: (context) => SplashBloc(locator<SecureStorageImpl>()),
+              child: Splashscreen(),
+            ),
           ),
         );
       },

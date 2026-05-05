@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
 import 'package:flutter_application_2/core/widget/app_text_field.dart';
+import 'package:flutter_application_2/features/Auth/logic/aut_event.dart';
+import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
+import 'package:flutter_application_2/features/Auth/logic/auth_state.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -14,9 +18,37 @@ class Loginscreen extends StatefulWidget {
 
 class _LoginscreenState extends State<Loginscreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthLoading) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 7,
+                backgroundColor: AppColors.dark,
+                color: AppColors.primary,
+                strokeCap: StrokeCap.round,
+              ),
+            ),
+          );
+        } else if (state is AuthSeccess) {
+          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, "/home");
+        } else if (state is AuthFailure) {
+          Navigator.pop(context);
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error)));
+        }
+      },
+    );
     final appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E2E),
@@ -102,6 +134,7 @@ class _LoginscreenState extends State<Loginscreen> {
               SizedBox(height: 10.h),
               AppTextField(
                 hintText: "example@example.com",
+                controller: emailController,
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return appLocalizations.translate('error_email_empty');
@@ -118,6 +151,7 @@ class _LoginscreenState extends State<Loginscreen> {
               AppTextField(
                 hintText: "********",
                 isPassword: true,
+                controller: passwordController,
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return appLocalizations.translate('error_password_empty');
@@ -156,10 +190,11 @@ class _LoginscreenState extends State<Loginscreen> {
                 text: appLocalizations.translate('button_login'),
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      "/home",
-                      (route) => false,
+                    context.read().add(
+                      LoginRequested(
+                        emailController.text,
+                        passwordController.text,
+                      ),
                     );
                   }
                 },

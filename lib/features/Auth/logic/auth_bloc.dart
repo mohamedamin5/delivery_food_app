@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           event.email,
           event.password,
           event.username,
-          event.phone,
+          event.retype_password,
         );
         emit(AuthSeccess(response.toString()));
       } catch (e) {
