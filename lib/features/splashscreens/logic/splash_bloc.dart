@@ -1,4 +1,6 @@
 import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/consts/storage_keys.dart';
+import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/services/jwt_service.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_source.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_event.dart';
@@ -6,16 +8,19 @@ import 'package:flutter_application_2/features/splashscreens/logic/splash_state.
 
 //user
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
+  final AppLocalDataSourceImpl _appLocalDataSourceImpl;
   final SecureStorageDataSource _storage;
   final JwtService jwt = JwtService();
-  SplashBloc(this._storage) : super(SplashInitial()) {
+  SplashBloc(this._storage, this._appLocalDataSourceImpl)
+    : super(SplashInitial()) {
     on<AppStarted>((event, emit) async {
-      final token = await _storage.read("refresh_token");
-      if (token == null) {
-        emit(Unauthenticated());
+      if (_appLocalDataSourceImpl.isFirstTime()) {
+        emit(FirstTimeUsage());
       } else {
-        final String? role = jwt.getUserRole(token);
-        if (jwt.isTokenValid(token) && role == 'user') {
+        final accessToken = await _storage.read(StorageKeys.accessToken);
+        if (accessToken == null) {
+          emit(Unauthenticated());
+        } else {
           emit(Authenticated());
         }
       }
