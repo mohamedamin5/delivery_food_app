@@ -18,12 +18,12 @@ class RegisterRequested extends AuthEvent {
   final String username;
   final String password;
   final String email;
-  final String retypePassword;
+  final String phoneNumber;
 
   const RegisterRequested(
     this.username,
     this.password,
     this.email,
-    this.retypePassword,
+    this.phoneNumber,
   );
 }

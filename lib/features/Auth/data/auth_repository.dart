@@ -10,11 +10,11 @@ class AuthRepository {
 
   AuthRepository(this.api, this.storage);
 
-  Future<void> login(String email, String password) async {
+  Future<void> login({required String email, required String password}) async {
     try {
       final response = await api.post(
         ApiEndpoints.login,
-        queryParameters: {'email': email, 'password': password},
+        body: {"email": email, "password": password},
       );
       if (response[StorageKeys.accessToken] != null &&
           response[StorageKeys.refershToken] != null) {
@@ -33,20 +33,20 @@ class AuthRepository {
     }
   }
 
-  Future<void> register(
-    String username,
-    String password,
-    String email,
-    String retypePassword,
-  ) async {
+  Future<void> register({
+    required String username,
+    required String password,
+    required String email,
+    required String phone,
+  }) async {
     try {
       final response = await api.post(
         ApiEndpoints.register,
         queryParameters: {
-          'username': username,
-          'password': password,
+          'full_name': username,
           'email': email,
-          'phone': retypePassword,
+          'password': password,
+          'phone': phone,
         },
       );
       if (response[StorageKeys.accessToken] != null &&

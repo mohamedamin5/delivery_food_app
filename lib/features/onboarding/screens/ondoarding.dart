@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
 
 class Ondoarding extends StatefulWidget {
-  const Ondoarding({super.key});
+  final AppLocalDataSourceImpl appLocalDataSourceImpl;
+  const Ondoarding(this.appLocalDataSourceImpl, {super.key});
 
   @override
   State<Ondoarding> createState() => _OndoardingState();
@@ -12,6 +14,11 @@ class Ondoarding extends StatefulWidget {
 class _OndoardingState extends State<Ondoarding> {
   PageController pageController = PageController();
   int currentPage = 0;
+
+  void isFirstTime() {
+    widget.appLocalDataSourceImpl.cacheFirstTimer(false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -92,6 +99,7 @@ class _OndoardingState extends State<Ondoarding> {
                 onTap: () {
                   if (currentPage == 2) {
                     Navigator.pushReplacementNamed(context, "/login");
+                    isFirstTime();
                   } else {
                     pageController.nextPage(
                       duration: Duration(milliseconds: 500),
@@ -106,6 +114,7 @@ class _OndoardingState extends State<Ondoarding> {
             GestureDetector(
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/login");
+                isFirstTime();
               },
               child: Text(
                 appLocalizations.translate("button_skip"),

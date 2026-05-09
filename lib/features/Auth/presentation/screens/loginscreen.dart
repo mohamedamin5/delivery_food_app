@@ -23,7 +23,8 @@ class _LoginscreenState extends State<Loginscreen> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    BlocListener<AuthBloc, AuthState>(
+    final appLocalizations = AppLocalizations.of(context)!;
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthLoading) {
           showDialog(
@@ -48,20 +49,19 @@ class _LoginscreenState extends State<Loginscreen> {
           ).showSnackBar(SnackBar(content: Text(state.error)));
         }
       },
-    );
-    final appLocalizations = AppLocalizations.of(context)!;
-    return Scaffold(
-      backgroundColor: const Color(0xFF1E1E2E),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildHeader(
-                appLocalizations.translate('login_title'),
-                appLocalizations.translate('login_description'),
-              ),
-              _buildSignUpForm(appLocalizations),
-            ],
+      child: Scaffold(
+        backgroundColor: const Color(0xFF1E1E2E),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildHeader(
+                  appLocalizations.translate('login_title'),
+                  appLocalizations.translate('login_description'),
+                ),
+                _buildSignUpForm(appLocalizations),
+              ],
+            ),
           ),
         ),
       ),

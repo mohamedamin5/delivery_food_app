@@ -21,12 +21,24 @@ class _SingUpScreenState extends State<SingUpScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController retypePasswordController =
-      TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
+
+  void onTap() {
+    context.read().add(
+      RegisterRequested(
+        nameController.text,
+        passwordController.text,
+        emailController.text,
+        phoneNumber.text,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
-    BlocListener<AuthBloc, AuthState>(
+
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthLoading) {
           showDialog(
@@ -51,15 +63,15 @@ class _SingUpScreenState extends State<SingUpScreen> {
           ).showSnackBar(SnackBar(content: Text(state.error)));
         }
       },
-    );
-    return Scaffold(
-      backgroundColor: AppColors.dark,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(child: _buildHeader(appLocalizations)),
-            SliverToBoxAdapter(child: _buildSignUpForm(appLocalizations)),
-          ],
+      child: Scaffold(
+        backgroundColor: AppColors.dark,
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: _buildHeader(appLocalizations)),
+              SliverToBoxAdapter(child: _buildSignUpForm(appLocalizations)),
+            ],
+          ),
         ),
       ),
     );
@@ -162,8 +174,28 @@ class _SingUpScreenState extends State<SingUpScreen> {
               },
             ),
             SizedBox(height: 8.h),
+            _buildFieldLabel(
+              appLocalizations.translate('hint_retype_password'),
+            ),
+            SizedBox(height: 10.h),
+            AppTextField(
+              controller: phoneNumber,
+              hintText: "phone number",
+              isPassword: true,
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return appLocalizations.translate('error_password_empty');
+                }
+                if (value.length < 6) {
+                  return appLocalizations.translate('error_password_short');
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 8.h),
             _buildFieldLabel(appLocalizations.translate('hint_password')),
             SizedBox(height: 10.h),
+
             AppTextField(
               controller: passwordController,
               hintText: "********",
@@ -178,40 +210,11 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 return null;
               },
             ),
-            SizedBox(height: 8.h),
-            _buildFieldLabel(
-              appLocalizations.translate('hint_retype_password'),
-            ),
-            SizedBox(height: 10.h),
-            AppTextField(
-              controller: retypePasswordController,
-              hintText: "********",
-              isPassword: true,
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return appLocalizations.translate('error_password_empty');
-                }
-                if (value.length < 6) {
-                  return appLocalizations.translate('error_password_short');
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 20.h),
 
             SizedBox(height: 40.h),
             AppButton(
               text: appLocalizations.translate('button_signup'),
-              onTap: () {
-                context.read().add(
-                  RegisterRequested(
-                    nameController.text,
-                    passwordController.text,
-                    emailController.text,
-                    retypePasswordController.text,
-                  ),
-                );
-              },
+              onTap: onTap,
               height: 62.h,
             ),
             SizedBox(height: 20.h),

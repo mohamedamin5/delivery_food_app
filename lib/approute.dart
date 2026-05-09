@@ -1,3 +1,4 @@
+import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/id/service_locator.dart';
 import 'package:flutter_application_2/features/Auth/data/auth_repository.dart';
 import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
@@ -30,7 +31,9 @@ class Approute {
           ),
         );
       case "/onboarding":
-        return MaterialPageRoute(builder: (context) => const Ondoarding());
+        return MaterialPageRoute(
+          builder: (context) => Ondoarding(locator<AppLocalDataSourceImpl>()),
+        );
       case "/forgot_password":
         return MaterialPageRoute(
           builder: (context) => const ForgotPasswordScreen(),

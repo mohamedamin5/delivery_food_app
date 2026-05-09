@@ -11,9 +11,14 @@ class DioConsumer implements IApiConsumer {
   Future<dynamic> delete(
     String url, {
     Map<String, dynamic>? queryParameters,
+    Options? options,
   }) async {
     try {
-      final response = await _dio.delete(url, queryParameters: queryParameters);
+      final response = await _dio.delete(
+        options: options,
+        url,
+        queryParameters: queryParameters,
+      );
       return response;
     } on DioException catch (e) {
       return handleDioException(e);
@@ -24,6 +29,7 @@ class DioConsumer implements IApiConsumer {
   Future<dynamic> get(
     String url, {
     Map<String, dynamic>? queryParameters,
+    Options? options,
   }) async {
     try {
       final response = await _dio.get(url, queryParameters: queryParameters);
@@ -38,12 +44,14 @@ class DioConsumer implements IApiConsumer {
     String url, {
     Map<String, dynamic>? queryParameters,
     dynamic body,
+    Options? options,
   }) async {
     try {
       final response = await _dio.post(
         url,
         queryParameters: queryParameters,
         data: body,
+        options: options,
       );
       return response;
     } on DioException catch (e) {
@@ -54,11 +62,13 @@ class DioConsumer implements IApiConsumer {
   @override
   Future<dynamic> put(
     String url, {
+    Options? options,
     Map<String, dynamic>? queryParameters,
     dynamic body,
   }) async {
     try {
       final response = await _dio.put(
+        options: options,
         url,
         queryParameters: queryParameters,
         data: body,

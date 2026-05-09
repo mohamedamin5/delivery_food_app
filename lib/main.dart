@@ -11,7 +11,7 @@ import 'package:flutter_application_2/screens.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
   final localeBloc = LocaleBloc();
   localeBloc.add(LoadSystemLocaleEvent());
   runApp(
@@ -20,6 +20,7 @@ void main() {
       child: const MyApp(),
     ),
   );
+  await setupLocator();
 }
 
 class MyApp extends StatefulWidget {
