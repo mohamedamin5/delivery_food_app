@@ -133,6 +133,7 @@ class _LoginscreenState extends State<Loginscreen> {
               _buildFieldLabel(appLocalizations.translate('hint_email')),
               SizedBox(height: 10.h),
               AppTextField(
+                keyboardType: TextInputType.emailAddress,
                 hintText: "example@example.com",
                 controller: emailController,
                 validator: (String? value) {
@@ -149,6 +150,7 @@ class _LoginscreenState extends State<Loginscreen> {
               _buildFieldLabel(appLocalizations.translate('hint_password')),
               SizedBox(height: 10.h),
               AppTextField(
+                keyboardType: TextInputType.text,
                 hintText: "********",
                 isPassword: true,
                 controller: passwordController,
@@ -190,7 +192,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 text: appLocalizations.translate('button_login'),
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    context.read().add(
+                    context.read<AuthBloc>().add(
                       LoginRequested(
                         emailController.text,
                         passwordController.text,

@@ -88,6 +88,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       Text(appLocalizations.translate('hint_email')),
                       SizedBox(height: 10.h),
                       AppTextField(
+                        keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         hintText: "example@example.com",
                         validator: (String? value) {

@@ -14,7 +14,9 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
-    context.read<SplashBloc>().add(AppStarted());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SplashBloc>().add(AppStarted());
+    });
     super.initState();
   }
 

@@ -8,8 +8,10 @@ class AppTextField extends StatefulWidget {
     this.isPassword = false,
     required this.validator,
     required this.controller,
+    required this.keyboardType,
   });
   final String hintText;
+  final TextInputType? keyboardType;
   final bool isPassword;
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -22,6 +24,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: widget.keyboardType,
       controller: widget.controller,
       validator: widget.validator,
       obscureText: _obscureText,

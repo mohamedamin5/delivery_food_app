@@ -19,7 +19,7 @@ class AuthRepository {
       if (response[StorageKeys.accessToken] != null &&
           response[StorageKeys.refershToken] != null) {
         final access = response[StorageKeys.accessToken];
-        final refersh = response[StorageKeys.accessToken];
+        final refersh = response[StorageKeys.refershToken];
 
         await storage.save(StorageKeys.refershToken, refersh);
         await storage.save(StorageKeys.accessToken, access);
@@ -42,17 +42,18 @@ class AuthRepository {
     try {
       final response = await api.post(
         ApiEndpoints.register,
-        queryParameters: {
+        body: {
           'full_name': username,
           'email': email,
           'password': password,
           'phone': phone,
         },
       );
+
       if (response[StorageKeys.accessToken] != null &&
           response[StorageKeys.refershToken] != null) {
         final access = response[StorageKeys.accessToken];
-        final refersh = response[StorageKeys.accessToken];
+        final refersh = response[StorageKeys.refershToken];
 
         await storage.save(StorageKeys.refershToken, refersh);
         await storage.save(StorageKeys.accessToken, access);

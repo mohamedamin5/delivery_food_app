@@ -24,7 +24,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
   final TextEditingController phoneNumber = TextEditingController();
 
   void onTap() {
-    context.read().add(
+    context.read<AuthBloc>().add(
       RegisterRequested(
         nameController.text,
         passwordController.text,
@@ -150,6 +150,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             AppTextField(
               controller: nameController,
               hintText: "John Doe",
+              keyboardType: TextInputType.text,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return appLocalizations.translate('error_name_empty');
@@ -161,6 +162,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             _buildFieldLabel(appLocalizations.translate('hint_email')),
             SizedBox(height: 10.h),
             AppTextField(
+              keyboardType: TextInputType.emailAddress,
               controller: emailController,
               hintText: "example@example.com",
               validator: (String? value) {
@@ -179,16 +181,10 @@ class _SingUpScreenState extends State<SingUpScreen> {
             ),
             SizedBox(height: 10.h),
             AppTextField(
+              keyboardType: TextInputType.phone,
               controller: phoneNumber,
               hintText: "phone number",
-              isPassword: true,
               validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return appLocalizations.translate('error_password_empty');
-                }
-                if (value.length < 6) {
-                  return appLocalizations.translate('error_password_short');
-                }
                 return null;
               },
             ),
@@ -200,6 +196,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
               controller: passwordController,
               hintText: "********",
               isPassword: true,
+              keyboardType: TextInputType.text,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return appLocalizations.translate('error_password_empty');

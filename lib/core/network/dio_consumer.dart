@@ -19,7 +19,7 @@ class DioConsumer implements IApiConsumer {
         url,
         queryParameters: queryParameters,
       );
-      return response;
+      return response.data;
     } on DioException catch (e) {
       return handleDioException(e);
     }
@@ -33,7 +33,7 @@ class DioConsumer implements IApiConsumer {
   }) async {
     try {
       final response = await _dio.get(url, queryParameters: queryParameters);
-      return response;
+      return response.data;
     } on DioException catch (e) {
       return handleDioException(e);
     }
@@ -53,7 +53,7 @@ class DioConsumer implements IApiConsumer {
         data: body,
         options: options,
       );
-      return response;
+      return response.data;
     } on DioException catch (e) {
       return handleDioException(e);
     }
@@ -73,7 +73,7 @@ class DioConsumer implements IApiConsumer {
         queryParameters: queryParameters,
         data: body,
       );
-      return response;
+      return response.data;
     } on DioException catch (e) {
       return handleDioException(e);
     }
