@@ -4,17 +4,19 @@ import 'package:flutter_application_2/core/themes/appcolor.dart';
 class AppTextField extends StatefulWidget {
   const AppTextField({
     super.key,
-    required this.hintText,
+    this.hintText,
+    this.prefixIcon,
     this.isPassword = false,
     required this.validator,
     required this.controller,
     required this.keyboardType,
   });
-  final String hintText;
+  final String? hintText;
   final TextInputType? keyboardType;
   final bool isPassword;
   final String? Function(String?)? validator;
   final TextEditingController controller;
+  final Widget? prefixIcon;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -35,6 +37,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         filled: true,
         fillColor: const Color(0xFFF5F5F5),
+        prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(

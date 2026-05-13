@@ -5,6 +5,7 @@ import 'package:flutter_application_2/core/id/service_locator.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceimpl.dart';
+
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
 import 'package:flutter_application_2/screens.dart';
@@ -49,16 +50,18 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: BlocProvider(
-              create: (context) => SplashBloc(
-                locator<SecureStorageDataSourceImpl>(),
-                locator<AppLocalDataSourceImpl>(),
-              ),
-              child: Splashscreen(),
-            ),
+            home: AddFoodItemPage(),
           ),
         );
       },
     );
   }
 }
+
+// BlocProvider(
+//               create: (context) => SplashBloc(
+//                 locator<SecureStorageDataSourceImpl>(),
+//                 locator<AppLocalDataSourceImpl>(),
+//               ),
+//               child: Splashscreen(),
+//             ),

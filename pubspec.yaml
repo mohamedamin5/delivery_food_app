@@ -39,6 +39,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.3
+  image_picker: ^1.2.2
   equatable: ^2.0.8
   dio: ^5.9.2
   flutter_secure_storage: ^10.0.0

@@ -15,3 +15,5 @@ export 'package:flutter_application_2/features/track/presentation/screens/tracki
 export 'package:flutter_application_2/features/chat/presentation/screens/chat_view.dart';
 export 'package:flutter_application_2/features/setting/presentation/screens/setting_screen.dart';
 export 'package:flutter_application_2/features/orders/presentation/screens/my_orders_screen.dart';
+export 'package:flutter_application_2/features/manage_restaurant/presentation/screens/restaurant_settings_page.dart';
+export 'package:flutter_application_2/features/chef_menu/presentation/screens/add_food_item_page.dart';

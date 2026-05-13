@@ -70,7 +70,27 @@
 
     "button_add_card":"إضافة بطاقة",
     "Text_card_holder_name":"اسم حامل البطاقة",
-    "button_add_make_payment":"إضافة ودفع"
+    "button_add_make_payment":"إضافة ودفع",
+    "button_add_new_item":"إضافة وجبة جديدة",
+    "text_add_item_image":"اضغط لإضافة صورة الوجبة",
+    "Text_item_description":"وصف العنصر",
+    "Text_item_price":"سعر العنصر",
+    "Text_item_category":"تصنيف العنصر",
+    "button_save":"حفظ",
+    "error_field_required":"هذا الحقل مطلوب",
+    "text_select_category":"اختر الفئة",
+    "text_location": "الموقع",
+    "text_running_orders": "الطلبات الجارية",
+    "text_order_request": "طلبات جديدة",
+    "text_total_revenue": "إجمالي الإيرادات",
+    "button_see_details": "عرض التفاصيل",
+    "text_daily": "يومياً",
+    "text_reviews": "التقييمات",
+    "button_see_all_reviews": "عرض الكل",
+    "text_total_reviews": "إجمالي 20 تقييم",
+    "text_popular_items_this_weeks": "الأصناف الشائعة هذا الأسبوع",
+    "button_see_all": "عرض الكل"
+
 
 
 

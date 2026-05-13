@@ -65,6 +65,25 @@
     "hint_enter_delivery_address":"Enter delivery address",
     "button_add_card":"Add Card",
     "Text_card_holder_name":"CARD HOLDER NAME",
-    "button_add_make_payment":"Add & Make Payment"
+    "button_add_make_payment":"Add & Make Payment",
+     "button_add_new_item":"Add New Item",
+    "text_add_item_image":"Click to Add Item Image",
+    "Text_item_description":"Item Description",
+    "Text_item_price":"Item Price",
+    "Text_item_category":"Item Category",
+    "button_save":"Save",
+    "error_field_required":"This field is required",
+    "text_location": "LOCATION",
+    "text_running_orders": "RUNNING ORDERS",
+    "text_order_request": "ORDER REQUEST",
+    "text_total_revenue": "Total Revenue",
+    "button_see_details": "See Details",
+    "text_daily": "Daily",
+    "text_reviews": "Reviews",
+    "button_see_all_reviews": "See All Reviews",
+    "text_total_reviews": "Total 20 Reviews",
+    "text_popular_items_this_weeks": "Popular Items This Weeks",
+    "button_see_all": "See All"
+
 
 }
