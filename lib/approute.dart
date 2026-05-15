@@ -61,6 +61,12 @@ class Approute {
             child: CategoryProductsScreen(),
           ),
         );
+      case "/addfooditempage":
+        return MaterialPageRoute(builder: (context) => const AddFoodItemPage());
+      case "/editrestaurantpage":
+        return MaterialPageRoute(
+          builder: (context) => const EditRestaurantPage(),
+        );
       default:
         return null;
     }

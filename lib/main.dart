@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: AddFoodItemPage(),
+            home: SellerDashboard(),
           ),
         );
       },

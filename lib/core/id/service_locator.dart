@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
+import 'package:flutter_application_2/core/data/data_source/firebase_storage_impl.dart';
 import 'package:flutter_application_2/core/network/dio_consumer.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceimpl.dart';
@@ -22,7 +24,13 @@ Future<void> setupLocator() async {
   );
   final sharedPreferences = await SharedPreferences.getInstance();
   locator.registerSingleton<SharedPreferences>(sharedPreferences);
+  locator.registerLazySingleton<FirebaseStorage>(
+    () => FirebaseStorage.instance,
+  );
 
+  locator.registerLazySingleton<FirebaseStorageImpl>(
+    () => FirebaseStorageImpl(locator<FirebaseStorage>()),
+  );
   locator.registerLazySingleton<IApiConsumer>(
     () => DioConsumer(locator<Dio>()),
   );

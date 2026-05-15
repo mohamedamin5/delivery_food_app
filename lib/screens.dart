@@ -17,3 +17,4 @@ export 'package:flutter_application_2/features/setting/presentation/screens/sett
 export 'package:flutter_application_2/features/orders/presentation/screens/my_orders_screen.dart';
 export 'package:flutter_application_2/features/manage_restaurant/presentation/screens/restaurant_settings_page.dart';
 export 'package:flutter_application_2/features/chef_menu/presentation/screens/add_food_item_page.dart';
+export 'package:flutter_application_2/features/selllerdashboardhome/presentation/screens/seller_dashboard_home.dart';

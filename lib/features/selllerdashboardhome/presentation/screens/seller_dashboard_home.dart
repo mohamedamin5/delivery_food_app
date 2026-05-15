@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
+import 'package:flutter_application_2/core/ui_essentials.dart';
 
 class SellerDashboard extends StatelessWidget {
   const SellerDashboard({super.key});
@@ -9,16 +9,16 @@ class SellerDashboard extends StatelessWidget {
     final appLocalizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FB),
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Section
               _buildHeader(appLocalizations),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.h),
 
               // Summary Statistics
               Row(
@@ -27,22 +27,22 @@ class SellerDashboard extends StatelessWidget {
                     appLocalizations.translate("text_running_orders"),
                     "20",
                   ),
-                  const SizedBox(width: 15),
+                  SizedBox(width: 15.w),
                   _buildSummaryCard(
                     appLocalizations.translate("text_order_request"),
                     "05",
                   ),
                 ],
               ),
-              const SizedBox(height: 25),
+              SizedBox(height: 25.h),
 
               // Revenue Section (Empty Chart Container)
               _buildRevenueCard(appLocalizations),
-              const SizedBox(height: 25),
+              SizedBox(height: 25.h),
 
               // Reviews Section
               _buildReviewsCard(appLocalizations),
-              const SizedBox(height: 25),
+              SizedBox(height: 25.h),
 
               // Popular Items Section
               _buildPopularItemsSection(appLocalizations),
@@ -50,15 +50,17 @@ class SellerDashboard extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      bottomNavigationBar: _buildBottomNav(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFFFFF5F1),
-        shape: const CircleBorder(
-          side: BorderSide(color: Colors.orange, width: 1.5),
+        onPressed: () {
+          Navigator.pushNamed(context, "/addfooditempage");
+        },
+        backgroundColor: AppColors.white,
+        shape: CircleBorder(
+          side: BorderSide(color: AppColors.primary, width: 1.5.w),
         ),
         elevation: 2,
-        child: const Icon(Icons.add, color: Colors.orange, size: 35),
+        child: Icon(Icons.add, color: AppColors.primary, size: 35.sp),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
@@ -69,40 +71,40 @@ class SellerDashboard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: AppColors.white,
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.short_text, size: 30),
+          child: Icon(Icons.short_text, size: 30.sp),
         ),
         Column(
           children: [
             Text(
               lang.translate("text_location"),
-              style: const TextStyle(
-                color: Colors.orange,
+              style: TextStyle(
+                color: AppColors.primary,
                 fontWeight: FontWeight.bold,
-                fontSize: 12,
+                fontSize: 12.sp,
                 letterSpacing: 1.2,
               ),
             ),
             Row(
-              children: const [
+              children: [
                 Text(
                   "Halal Lab office",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: Color(0xFF2D3142),
                   ),
                 ),
-                Icon(Icons.arrow_drop_down, color: Color(0xFF2D3142)),
+                Icon(Icons.arrow_drop_down, color: AppColors.dark),
               ],
             ),
           ],
         ),
-        const CircleAvatar(backgroundColor: Color(0xFFA0B2C1), radius: 25),
+        CircleAvatar(backgroundColor: Color(0xFFA0B2C1), radius: 25.r),
       ],
     );
   }
@@ -110,27 +112,27 @@ class SellerDashboard extends StatelessWidget {
   Widget _buildSummaryCard(String title, String value) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(25),
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(25.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 45,
+              style: TextStyle(
+                fontSize: 45.sp,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF2D3142),
+                color: AppColors.dark,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 11,
+              style: TextStyle(
+                fontSize: 11.sp,
                 color: Color(0xFF9EA3AE),
                 fontWeight: FontWeight.w900,
               ),
@@ -143,10 +145,10 @@ class SellerDashboard extends StatelessWidget {
 
   Widget _buildRevenueCard(var lang) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(25.r),
       ),
       child: Column(
         children: [
@@ -159,16 +161,13 @@ class SellerDashboard extends StatelessWidget {
                 children: [
                   Text(
                     lang.translate("text_total_revenue"),
-                    style: const TextStyle(
-                      color: Color(0xFF9EA3AE),
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(color: Color(0xFF9EA3AE), fontSize: 14.sp),
                   ),
-                  const SizedBox(height: 5),
-                  const Text(
+                  SizedBox(height: 5.h),
+                  Text(
                     "\$2,241",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: 28.sp,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF2D3142),
                     ),
@@ -183,32 +182,29 @@ class SellerDashboard extends StatelessWidget {
                     child: Text(
                       lang.translate("button_see_details"),
                       style: const TextStyle(
-                        color: Colors.orange,
+                        color: AppColors.primary,
                         decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 5,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 5.h,
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade200),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Row(
                       children: [
                         Text(
                           lang.translate("text_daily"),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
+                          style: TextStyle(fontSize: 12.sp, color: Colors.grey),
                         ),
-                        const Icon(
+                        Icon(
                           Icons.arrow_drop_down,
-                          size: 18,
+                          size: 18.sp,
                           color: Colors.grey,
                         ),
                       ],
@@ -218,10 +214,10 @@ class SellerDashboard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           // Empty Container for Chart as requested
           Container(
-            height: 150,
+            height: 150.h,
             width: double.infinity,
             decoration: const BoxDecoration(
               // Placeholder styling
@@ -234,10 +230,10 @@ class SellerDashboard extends StatelessWidget {
 
   Widget _buildReviewsCard(var lang) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(25.r),
       ),
       child: Column(
         children: [
@@ -246,9 +242,9 @@ class SellerDashboard extends StatelessWidget {
             children: [
               Text(
                 lang.translate("text_reviews"),
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Color(0xFF2D3142),
                 ),
               ),
@@ -257,30 +253,30 @@ class SellerDashboard extends StatelessWidget {
                 child: Text(
                   lang.translate("button_see_all_reviews"),
                   style: const TextStyle(
-                    color: Colors.orange,
+                    color: AppColors.primary,
                     decoration: TextDecoration.underline,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           Row(
             children: [
-              const Icon(Icons.star, color: Colors.orange, size: 32),
-              const SizedBox(width: 8),
-              const Text(
+              Icon(Icons.star, color: AppColors.primary, size: 32.sp),
+              SizedBox(width: 8.w),
+              Text(
                 "4.9",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: AppColors.primary,
                 ),
               ),
-              const SizedBox(width: 15),
+              SizedBox(width: 15.w),
               Text(
                 lang.translate("text_total_reviews"),
-                style: const TextStyle(color: Color(0xFF9EA3AE), fontSize: 15),
+                style: TextStyle(color: Color(0xFF9EA3AE), fontSize: 15.sp),
               ),
             ],
           ),
@@ -297,9 +293,9 @@ class SellerDashboard extends StatelessWidget {
           children: [
             Text(
               lang.translate("text_popular_items_this_weeks"),
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15,
+                fontSize: 15.sp,
                 color: Color(0xFF2D3142),
               ),
             ),
@@ -307,16 +303,16 @@ class SellerDashboard extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 lang.translate("button_see_all"),
-                style: const TextStyle(color: Colors.orange),
+                style: const TextStyle(color: AppColors.primary),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10.h),
         Row(
           children: [
             _itemPlaceholder(),
-            const SizedBox(width: 15),
+            SizedBox(width: 15.w),
             _itemPlaceholder(),
           ],
         ),
@@ -327,51 +323,54 @@ class SellerDashboard extends StatelessWidget {
   Widget _itemPlaceholder() {
     return Expanded(
       child: Container(
-        height: 160,
+        height: 160.h,
         decoration: BoxDecoration(
           color: const Color(0xFFA0B2C1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
       ),
     );
   }
 
-  Widget _buildBottomNav() {
+  Widget _buildBottomNav(BuildContext context) {
     return BottomAppBar(
-      height: 70,
-      notchMargin: 10,
+      color: Colors.white,
+      height: 70.h,
+      notchMargin: 10.w,
       shape: const CircularNotchedRectangle(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.grid_view_rounded,
-              color: Colors.orange,
-              size: 28,
+              color: AppColors.primary,
+              size: 28.sp,
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.menu, color: Color(0xFFD0D3D8), size: 28),
+            icon: Icon(Icons.menu, color: Color(0xFFD0D3D8), size: 28.sp),
             onPressed: () {},
           ),
-          const SizedBox(width: 40),
+          SizedBox(width: 40.w),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.notifications_none_outlined,
               color: Color(0xFFD0D3D8),
-              size: 28,
+              size: 28.sp,
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.person_outline_rounded,
               color: Color(0xFFD0D3D8),
-              size: 28,
+              size: 28.sp,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "/editrestaurantpage");
+            },
           ),
         ],
       ),

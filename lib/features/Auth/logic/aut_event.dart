@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class AuthEvent extends Equatable {
   const AuthEvent();
