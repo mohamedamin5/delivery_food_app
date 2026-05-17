@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/bloc/blocs_imports.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';

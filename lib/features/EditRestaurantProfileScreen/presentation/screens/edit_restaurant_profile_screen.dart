@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class EditRestaurantPage extends StatefulWidget {
-  const EditRestaurantPage({super.key});
+class RestaurantProfileEditor extends StatefulWidget {
+  const RestaurantProfileEditor({super.key});
 
   @override
-  State<EditRestaurantPage> createState() => _EditRestaurantPageState();
+  State<RestaurantProfileEditor> createState() =>
+      _RestaurantProfileEditorState();
 }
 
-class _EditRestaurantPageState extends State<EditRestaurantPage> {
+class _RestaurantProfileEditorState extends State<RestaurantProfileEditor> {
   // Controllers correspond to RestaurantUpdate model (Optional fields)
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descController = TextEditingController();

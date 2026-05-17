@@ -1,5 +1,6 @@
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+// user_data = {"sub": str(user_id), "role": role}
 class JwtService {
   bool isTokenValid(String? token) {
     if (token == null || token.isEmpty) return false;
@@ -21,6 +22,11 @@ class JwtService {
 
   String? getUserRole(String? token) {
     final data = getUserData(token);
-    return data?['role']?.toString(); // تأكد من الاسم اللي بتبعته من بايثون
+    return data?['role']?.toString();
+  }
+
+  String? getUserId(String? token) {
+    final data = getUserData(token);
+    return data?['sub']?.toString();
   }
 }

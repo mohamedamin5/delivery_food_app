@@ -1,3 +1,4 @@
-export 'package:flutter_bloc/flutter_bloc.dart';
-export 'package:flutter_application_2/core/providers/localprovider/locale_bloc_imports.dart';
-export 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
+// What I changed: Moved bloc import aggregations to `lib/core/bloc/blocs_imports.dart`.
+// Why: group cross-cutting BLoC exports under `core` for a cleaner feature-first layout.
+
+export 'package:flutter_application_2/core/bloc/blocs_imports.dart';

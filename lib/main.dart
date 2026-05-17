@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/approute.dart';
+import 'package:flutter_application_2/core/navigation/approute.dart';
 import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/id/service_locator.dart';
 import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
-import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/bloc/blocs_imports.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceimpl.dart';
 
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
-import 'package:flutter_application_2/screens.dart';
+import 'package:flutter_application_2/core/navigation/screens.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

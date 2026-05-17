@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/ui_essentials.dart';
+import 'package:flutter_application_2/core/utils/file_path_utils.dart';
 import 'package:flutter_application_2/features/Home/listrest.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -139,7 +140,12 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final String path = await PathGenerator.getTempImagePath(
+                      filePath: image!.path,
+                    );
+                    print(path);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF7622),
                     shape: RoundedRectangleBorder(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/bloc/blocs_imports.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_event.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_state.dart';

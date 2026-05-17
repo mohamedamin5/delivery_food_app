@@ -1,7 +1,7 @@
-import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/bloc/blocs_imports.dart';
 import 'package:flutter_application_2/core/consts/storage_keys.dart';
 import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
-import 'package:flutter_application_2/core/services/jwt_service.dart';
+import 'package:flutter_application_2/core/utils/jwt_hleper.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_source.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_event.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_state.dart';

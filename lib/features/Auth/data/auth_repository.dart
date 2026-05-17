@@ -17,11 +17,11 @@ class AuthRepository {
         body: {"email": email, "password": password},
       );
       if (response[StorageKeys.accessToken] != null &&
-          response[StorageKeys.refershToken] != null) {
+          response[StorageKeys.refreshToken] != null) {
         final access = response[StorageKeys.accessToken];
-        final refersh = response[StorageKeys.refershToken];
+        final refreshToken = response[StorageKeys.refreshToken];
 
-        await storage.save(StorageKeys.refershToken, refersh);
+        await storage.save(StorageKeys.refreshToken, refreshToken);
         await storage.save(StorageKeys.accessToken, access);
       } else {
         throw Exception(
@@ -51,12 +51,13 @@ class AuthRepository {
       );
 
       if (response[StorageKeys.accessToken] != null &&
-          response[StorageKeys.refershToken] != null) {
+          response[StorageKeys.refreshToken] != null) {
         final access = response[StorageKeys.accessToken];
-        final refersh = response[StorageKeys.refershToken];
+        final refreshToken = response[StorageKeys.refreshToken];
 
-        await storage.save(StorageKeys.refershToken, refersh);
+        await storage.save(StorageKeys.refreshToken, refreshToken);
         await storage.save(StorageKeys.accessToken, access);
+        await storage.save(StorageKeys.role, response[StorageKeys.role]);
       } else {
         throw Exception(
           'Invalid response: access_token not found or is not a string',
