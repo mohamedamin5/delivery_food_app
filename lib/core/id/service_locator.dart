@@ -5,7 +5,9 @@ import 'package:flutter_application_2/core/data/data_source/firebase_storage_imp
 import 'package:flutter_application_2/core/network/dio_consumer.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceimpl.dart';
-import 'package:flutter_application_2/features/Auth/data/auth_repository.dart';
+import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source.dart';
+import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
+import 'package:flutter_application_2/features/Auth/data/repositories/auth_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,5 +47,8 @@ Future<void> setupLocator() async {
       locator<IApiConsumer>(),
       locator<SecureStorageDataSourceImpl>(),
     ),
+  );
+  locator.registerLazySingleton<AuthRemoteDataSourceImp>(
+    () => AuthRemoteDataSourceImp(locator<IApiConsumer>()),
   );
 }

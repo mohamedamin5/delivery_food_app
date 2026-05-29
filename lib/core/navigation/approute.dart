@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/id/service_locator.dart';
-import 'package:flutter_application_2/features/Auth/data/auth_repository.dart';
+import 'package:flutter_application_2/features/Auth/data/repositories/auth_repository.dart';
 import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
 import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
 import 'package:flutter_application_2/core/navigation/screens.dart';

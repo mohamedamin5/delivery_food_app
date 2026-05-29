@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/navigation/approute.dart';
 import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
@@ -9,10 +11,15 @@ import 'package:flutter_application_2/core/data/data_source/secure_storage_data_
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
 import 'package:flutter_application_2/core/navigation/screens.dart';
+import 'package:flutter_application_2/firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  String host = "127.0.0.1";
+  FirebaseStorage.instance.useStorageEmulator(host, 9199);
   final localeBloc = LocaleBloc();
   localeBloc.add(LoadSystemLocaleEvent());
   runApp(

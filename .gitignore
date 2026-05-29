@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Firebase local data and emulators
+firebase_data/
+.firebase/
+firestore-debug-auth.json
+ui-debug.log
+android/app/google-services.json
