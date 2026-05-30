@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
-import 'package:image_picker/image_picker.dart';
 
 abstract class AddNewItemEvent extends Equatable {
   const AddNewItemEvent();
@@ -12,15 +13,15 @@ class AddNewItemRequested extends AddNewItemEvent {
   final String name;
   final String description;
   final double price;
-  final XFile image;
+  final File file;
 
   const AddNewItemRequested({
     required this.name,
     required this.description,
     required this.price,
-    required this.image,
+    required this.file,
   });
 
   @override
-  List<Object> get props => [name, description, price, image];
+  List<Object> get props => [name, description, price, file];
 }

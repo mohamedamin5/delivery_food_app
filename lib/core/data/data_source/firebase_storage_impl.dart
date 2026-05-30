@@ -11,6 +11,15 @@ class FirebaseStorageImpl implements BaseStorageDataSource {
     required String filePath,
     required File file,
   }) async {
-    return " ";
+    try {
+      final ref = _storage.ref().child(filePath);
+      final uploadTask = ref.putFile(file);
+
+      final snapshot = await uploadTask;
+      final downloadUrl = await snapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      return e.toString();
+    }
   }
 }

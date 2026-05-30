@@ -1,33 +1,21 @@
-import 'package:flutter_application_2/core/consts/storage_keys.dart';
-
-import 'package:flutter_application_2/core/network/api_endpoints.dart';
-import 'package:flutter_application_2/core/network/i_api_consumer.dart';
-import 'package:flutter_application_2/core/data/data_source/secure_storage_data_source.dart';
+import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source.dart';
+import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
 
 class AuthRepository {
-  final IApiConsumer api;
-  final SecureStorageDataSource storage;
+  final AuthLocalDataSource localDataSource;
+  final AuthRemoteDataSourceImp remoteDataSource;
 
-  AuthRepository(this.api, this.storage);
+  AuthRepository(this.localDataSource, this.remoteDataSource);
 
   Future<void> login({required String email, required String password}) async {
     try {
-      final response = await api.post(
-        ApiEndpoints.login,
-        body: {"email": email, "password": password},
+      final response = await remoteDataSource.login(email, password);
+      await localDataSource.saveAuthData(
+        response.accessToken,
+        response.refreshToken,
+        response.role,
+        response.userId,
       );
-      if (response[StorageKeys.accessToken] != null &&
-          response[StorageKeys.refreshToken] != null) {
-        final access = response[StorageKeys.accessToken];
-        final refreshToken = response[StorageKeys.refreshToken];
-
-        await storage.save(StorageKeys.refreshToken, refreshToken);
-        await storage.save(StorageKeys.accessToken, access);
-      } else {
-        throw Exception(
-          'Invalid response: access_token not found or is not a string',
-        );
-      }
     } catch (e) {
       throw Exception('Login failed: $e');
     }
@@ -40,29 +28,18 @@ class AuthRepository {
     required String phone,
   }) async {
     try {
-      final response = await api.post(
-        ApiEndpoints.register,
-        body: {
-          'full_name': username,
-          'email': email,
-          'password': password,
-          'phone': phone,
-        },
+      final response = await remoteDataSource.register(
+        username,
+        password,
+        email,
+        phone,
       );
-
-      if (response[StorageKeys.accessToken] != null &&
-          response[StorageKeys.refreshToken] != null) {
-        final access = response[StorageKeys.accessToken];
-        final refreshToken = response[StorageKeys.refreshToken];
-
-        await storage.save(StorageKeys.refreshToken, refreshToken);
-        await storage.save(StorageKeys.accessToken, access);
-        await storage.save(StorageKeys.role, response[StorageKeys.role]);
-      } else {
-        throw Exception(
-          'Invalid response: access_token not found or is not a string',
-        );
-      }
+      await localDataSource.saveAuthData(
+        response.accessToken,
+        response.refreshToken,
+        response.role,
+        response.userId,
+      );
     } catch (e) {
       throw Exception('Registration failed: $e');
     }

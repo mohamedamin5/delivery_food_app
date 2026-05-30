@@ -5,9 +5,11 @@ import 'package:flutter_application_2/core/data/data_source/firebase_storage_imp
 import 'package:flutter_application_2/core/network/dio_consumer.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceimpl.dart';
-import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source.dart';
+import 'package:flutter_application_2/core/utils/flutter_image_compress_helper.dart';
+import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source_impl.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
 import 'package:flutter_application_2/features/Auth/data/repositories/auth_repository.dart';
+import 'package:flutter_application_2/features/add_new_item/repositories/repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,11 +46,24 @@ Future<void> setupLocator() async {
   );
   locator.registerLazySingleton<AuthRepository>(
     () => AuthRepository(
-      locator<IApiConsumer>(),
-      locator<SecureStorageDataSourceImpl>(),
+      locator<AuthLocalDataSourceImpl>(),
+      locator<AuthRemoteDataSourceImp>(),
     ),
   );
   locator.registerLazySingleton<AuthRemoteDataSourceImp>(
     () => AuthRemoteDataSourceImp(locator<IApiConsumer>()),
+  );
+  locator.registerLazySingleton<AuthLocalDataSourceImpl>(
+    () => AuthLocalDataSourceImpl(locator<SecureStorageDataSourceImpl>()),
+  );
+  locator.registerLazySingleton<ImageCompressorService>(
+    () => ImageCompressorService(),
+  );
+  locator.registerLazySingleton<AddItemRepository>(
+    () => AddItemRepository(
+      locator<FirebaseStorageImpl>(),
+      locator<AuthLocalDataSourceImpl>(),
+      locator<ImageCompressorService>(),
+    ),
   );
 }

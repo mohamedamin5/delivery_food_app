@@ -33,7 +33,15 @@ class _SplashscreenState extends State<Splashscreen> {
         } else if (state is Unauthenticated) {
           Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
         } else if (state is Authenticated) {
-          Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+          if (state.role == UserRole.chef) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              "/sellerdashboard",
+              (r) => false,
+            );
+          } else {
+            Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+          }
         }
       },
       child: Scaffold(

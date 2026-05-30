@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter_application_2/core/utils/file_path_utils.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class ImageCompressorService {
-  Future<XFile?> compressImage({required XFile file}) async {
+  Future<File?> compressImage(File file) async {
     try {
       final String targetPath = await PathGenerator.getTempImagePath(
         filePath: file.path,
@@ -13,9 +15,9 @@ class ImageCompressorService {
         targetPath,
         quality: 80,
       );
-      return result;
+      return File(result!.path);
     } catch (e) {
-      print("Compression error: $e");
+      print("Error compressing image: $e");
       return null;
     }
   }
