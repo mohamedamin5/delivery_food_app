@@ -25,3 +25,8 @@ class AddNewItemRequested extends AddNewItemEvent {
   @override
   List<Object> get props => [name, description, price, file];
 }
+
+class GetAllCategoriesRequested extends AddNewItemEvent {
+  @override
+  List<Object> get props => [];
+}

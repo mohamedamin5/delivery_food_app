@@ -9,7 +9,8 @@ import 'package:flutter_application_2/core/utils/flutter_image_compress_helper.d
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source_impl.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
 import 'package:flutter_application_2/features/Auth/data/repositories/auth_repository.dart';
-import 'package:flutter_application_2/features/add_new_item/repositories/repository.dart';
+import 'package:flutter_application_2/features/add_new_item/data/datasource/add_item_remote_impl.dart';
+import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,6 +65,12 @@ Future<void> setupLocator() async {
       locator<FirebaseStorageImpl>(),
       locator<AuthLocalDataSourceImpl>(),
       locator<ImageCompressorService>(),
+    ),
+  );
+  locator.registerLazySingleton<AddItemRemoteImpl>(
+    () => AddItemRemoteImpl(
+      locator<IApiConsumer>(),
+      locator<AuthLocalDataSourceImpl>(),
     ),
   );
 }

@@ -14,7 +14,7 @@ class SplashInitial extends SplashState {}
 class Authenticated extends SplashState {
   final UserRole role;
 
-  Authenticated({required this.role});
+  const Authenticated({required this.role});
 }
 
 class Unauthenticated extends SplashState {}

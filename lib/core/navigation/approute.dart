@@ -7,7 +7,7 @@ import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
 import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
 import 'package:flutter_application_2/core/navigation/screens.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/bloc.dart';
-import 'package:flutter_application_2/features/add_new_item/repositories/repository.dart';
+import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
 class Approute {

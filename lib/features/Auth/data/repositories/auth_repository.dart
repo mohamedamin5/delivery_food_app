@@ -7,7 +7,10 @@ class AuthRepository {
 
   AuthRepository(this.localDataSource, this.remoteDataSource);
 
-  Future<void> login({required String email, required String password}) async {
+  Future<String> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       final response = await remoteDataSource.login(email, password);
       await localDataSource.saveAuthData(
@@ -16,12 +19,14 @@ class AuthRepository {
         response.role,
         response.userId,
       );
+
+      return response.role;
     } catch (e) {
       throw Exception('Login failed: $e');
     }
   }
 
-  Future<void> register({
+  Future<String> register({
     required String username,
     required String password,
     required String email,
@@ -34,12 +39,14 @@ class AuthRepository {
         email,
         phone,
       );
+
       await localDataSource.saveAuthData(
         response.accessToken,
         response.refreshToken,
         response.role,
         response.userId,
       );
+      return response.role;
     } catch (e) {
       throw Exception('Registration failed: $e');
     }

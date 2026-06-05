@@ -1,19 +1,30 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/event_bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/state_bloc.dart';
-import 'package:flutter_application_2/features/add_new_item/repositories/repository.dart';
+import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
 
 class AddNewItemBloc extends Bloc<AddNewItemEvent, AddNewItemState> {
   AddItemRepository repository;
   AddNewItemBloc(this.repository) : super(AddNewItemInitial()) {
+    add(GetAllCategoriesRequested());
     on<AddNewItemRequested>((event, emit) async {
       emit(AddNewItemLoading());
       try {
-        await repository.uploadFile(file: event.file);
-
+        await Future.delayed(const Duration(seconds: 2));
         emit(AddNewItemSuccess());
       } catch (e) {
         emit(AddNewItemFailure(e.toString()));
+      }
+    });
+
+    on<GetAllCategoriesRequested>((event, emit) async {
+      emit(GetAllCategoriesLoading());
+      try {
+        await Future.delayed(const Duration(seconds: 2));
+        final categories = <String>["Electronics", "Books", "Clothing", "Home"];
+        emit(GetAllCategoriesSuccess(categories));
+      } catch (e) {
+        emit(GetAllCategoriesFailure(e.toString()));
       }
     });
   }

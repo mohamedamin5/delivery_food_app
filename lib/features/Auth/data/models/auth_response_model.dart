@@ -1,6 +1,7 @@
 class AuthResponseModel {
   final String accessToken;
   final String refreshToken;
+  final String firebaseToken;
   final String userId;
   final String role;
 
@@ -9,13 +10,15 @@ class AuthResponseModel {
     required this.refreshToken,
     required this.userId,
     required this.role,
+    required this.firebaseToken,
   });
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
-      accessToken: json['accessToken'] as String,
-      refreshToken: json['refreshToken'] as String,
-      userId: json['userId'] as String,
+      accessToken: json['access_token'] as String,
+      refreshToken: json['refresh_token'] as String,
+      firebaseToken: json['firebase_token'] as String,
+      userId: json['user_id'] as String,
       role: json['role'] as String,
     );
   }

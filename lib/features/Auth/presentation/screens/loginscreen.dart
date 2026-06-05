@@ -7,6 +7,7 @@ import 'package:flutter_application_2/core/widget/app_text_field.dart';
 import 'package:flutter_application_2/features/Auth/logic/aut_event.dart';
 import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
 import 'package:flutter_application_2/features/Auth/logic/auth_state.dart';
+import 'package:flutter_application_2/features/splashscreens/logic/splash_state.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -41,9 +42,18 @@ class _LoginscreenState extends State<Loginscreen> {
           );
         } else if (state is AuthSeccess) {
           Navigator.pop(context);
-          Navigator.pushReplacementNamed(context, "/home");
+          if (state.role == UserRole.chef) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              "/sellerdashboard",
+              (r) => false,
+            );
+          } else {
+            Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+          }
         } else if (state is AuthFailure) {
           Navigator.pop(context);
+          print("Login error: ${state.error}");
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.error)));

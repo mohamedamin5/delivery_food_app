@@ -28,6 +28,6 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     await storage.save(StorageKeys.accessToken, accessToken);
     await storage.save(StorageKeys.refreshToken, refreshToken);
     await storage.save(StorageKeys.role, role);
-    await storage.save(StorageKeys.role, role);
+    await storage.save(StorageKeys.userId, userId);
   }
 }
