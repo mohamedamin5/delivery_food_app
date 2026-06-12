@@ -6,9 +6,12 @@ import 'package:flutter_application_2/core/network/dio_consumer.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
 import 'package:flutter_application_2/core/data/data_source/secure_storage_data_sourceimpl.dart';
 import 'package:flutter_application_2/core/utils/flutter_image_compress_helper.dart';
+import 'package:flutter_application_2/features/Auth/Domain/usecases/login_user_case.dart';
+import 'package:flutter_application_2/features/Auth/Domain/usecases/logout_use_case.dart';
+import 'package:flutter_application_2/features/Auth/Domain/usecases/register_use_case.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source_impl.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
-import 'package:flutter_application_2/features/Auth/data/repositories/auth_repository.dart';
+import 'package:flutter_application_2/features/Auth/Domain/repositories/auth_repository.dart';
 import 'package:flutter_application_2/features/add_new_item/data/datasource/add_item_remote_impl.dart';
 import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -37,7 +40,7 @@ Future<void> setupLocator() async {
     () => FirebaseStorageImpl(locator<FirebaseStorage>()),
   );
   locator.registerLazySingleton<IApiConsumer>(
-    () => DioConsumer(locator<Dio>()),
+    () => DioConsumer(locator<Dio>(), locator<AuthLocalDataSourceImpl>()),
   );
   locator.registerLazySingleton<SecureStorageDataSourceImpl>(
     () => SecureStorageDataSourceImpl(locator<FlutterSecureStorage>()),
@@ -65,6 +68,7 @@ Future<void> setupLocator() async {
       locator<FirebaseStorageImpl>(),
       locator<AuthLocalDataSourceImpl>(),
       locator<ImageCompressorService>(),
+      locator<AddItemRemoteImpl>(),
     ),
   );
   locator.registerLazySingleton<AddItemRemoteImpl>(
@@ -72,5 +76,15 @@ Future<void> setupLocator() async {
       locator<IApiConsumer>(),
       locator<AuthLocalDataSourceImpl>(),
     ),
+  );
+
+  locator.registerLazySingleton<LoginUserCase>(
+    () => LoginUserCase(locator<AuthRepository>()),
+  );
+  locator.registerLazySingleton<RegisterUseCase>(
+    () => RegisterUseCase(locator<AuthRepository>()),
+  );
+  locator.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(locator<AuthRepository>()),
   );
 }

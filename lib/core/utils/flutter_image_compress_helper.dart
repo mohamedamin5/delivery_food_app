@@ -11,13 +11,12 @@ class ImageCompressorService {
       );
 
       final XFile? result = await FlutterImageCompress.compressAndGetFile(
-        file!.path,
+        file.path,
         targetPath,
         quality: 80,
       );
       return File(result!.path);
     } catch (e) {
-      print("Error compressing image: $e");
       return null;
     }
   }

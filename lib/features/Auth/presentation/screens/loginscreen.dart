@@ -4,9 +4,10 @@ import 'package:flutter_application_2/core/localization/app_localizations_delega
 import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
 import 'package:flutter_application_2/core/widget/app_text_field.dart';
-import 'package:flutter_application_2/features/Auth/logic/aut_event.dart';
-import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
-import 'package:flutter_application_2/features/Auth/logic/auth_state.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/aut_event.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_state.dart';
+
 import 'package:flutter_application_2/features/splashscreens/logic/splash_state.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -53,7 +54,7 @@ class _LoginscreenState extends State<Loginscreen> {
           }
         } else if (state is AuthFailure) {
           Navigator.pop(context);
-          print("Login error: ${state.error}");
+
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.error)));

@@ -30,7 +30,7 @@ class AddItemRemoteImpl implements AddItemRemote {
     final token = await authLocalDataSource.getAuthData(
       StorageKeys.accessToken,
     );
-    final response = await api.post(
+    await api.post(
       ApiEndpoints.products,
       body: {
         "name": name,

@@ -4,5 +4,5 @@ import 'package:flutter_application_2/features/EditRestaurantProfileScreen/logic
 
 class EditRestaurantProfileBloc
     extends Bloc<EditRestaurantProfileEvent, EditRestaurantProfileState> {
-  EditRestaurantProfileBloc() : super(EditRestaurantProfileInitial()) {}
+  EditRestaurantProfileBloc() : super(EditRestaurantProfileInitial());
 }

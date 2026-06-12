@@ -27,3 +27,5 @@ class RegisterRequested extends AuthEvent {
     this.phoneNumber,
   );
 }
+
+class LogoutRequested extends AuthEvent {}

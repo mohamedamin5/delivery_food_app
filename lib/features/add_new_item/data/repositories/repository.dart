@@ -5,15 +5,19 @@ import 'package:flutter_application_2/core/data/data_source/base_storage_data_so
 import 'package:flutter_application_2/core/utils/file_path_utils.dart';
 import 'package:flutter_application_2/core/utils/flutter_image_compress_helper.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source.dart';
+import 'package:flutter_application_2/features/add_new_item/data/datasource/add_item_remote.dart';
+import 'package:flutter_application_2/features/add_new_item/data/model/add_item_response_model.dart';
 
 class AddItemRepository {
   final BaseStorageDataSource _storageDataSource;
   final AuthLocalDataSource _authLocalDataSource;
   final ImageCompressorService _imageCompressorService;
+  final AddItemRemote _addItemRemote;
   AddItemRepository(
     this._storageDataSource,
     this._authLocalDataSource,
     this._imageCompressorService,
+    this._addItemRemote,
   );
   Future<String> uploadUserItemImage(File? file) async {
     try {
@@ -36,7 +40,7 @@ class AddItemRepository {
 
   void _validateInputFile(File? file) {
     if (file == null) {
-      throw ValidationException("The provided file is null");
+      throw ("The provided file is null");
     }
   }
 
@@ -45,13 +49,11 @@ class AddItemRepository {
         .getAuthData(StorageKeys.userId)
         .timeout(
           const Duration(seconds: 5),
-          onTimeout: () => throw NetworkTimeoutException(
-            "Failed to fetch user data (Timeout)",
-          ),
+          onTimeout: () => throw ("Failed to fetch user data (Timeout)",),
         );
 
     if (userId == null) {
-      throw AuthException("User is not logged in");
+      throw ("User is not logged in");
     }
     return userId;
   }
@@ -74,24 +76,18 @@ class AddItemRepository {
         .uploadFile(filePath: filepath, file: file)
         .timeout(
           const Duration(seconds: 30),
-          onTimeout: () => throw NetworkTimeoutException(
+          onTimeout: () => throw (
             "Connection timed out! Network is very weak or server is not responding",
           ),
         );
   }
-}
 
-class AuthException implements Exception {
-  final String message;
-  AuthException(this.message);
-}
-
-class NetworkTimeoutException implements Exception {
-  final String message;
-  NetworkTimeoutException(this.message);
-}
-
-class ValidationException implements Exception {
-  final String message;
-  ValidationException(this.message);
+  Future<List<AddItemResponseModel>> getALlCategories() async {
+    try {
+      final categories = await _addItemRemote.getallCategories();
+      return categories;
+    } catch (e) {
+      throw ("Failed to fetch categories: $e");
+    }
+  }
 }

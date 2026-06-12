@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/data/data_source/app_local_data_source_impl.dart';
 import 'package:flutter_application_2/core/id/service_locator.dart';
+import 'package:flutter_application_2/features/Auth/Domain/usecases/login_user_case.dart';
+import 'package:flutter_application_2/features/Auth/Domain/usecases/logout_use_case.dart';
+import 'package:flutter_application_2/features/Auth/Domain/usecases/register_use_case.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source_impl.dart';
-import 'package:flutter_application_2/features/Auth/data/repositories/auth_repository.dart';
-import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
+import 'package:flutter_application_2/features/Auth/Domain/repositories/auth_repository.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_bloc.dart';
+
 import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
 import 'package:flutter_application_2/core/navigation/screens.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
+import 'package:flutter_application_2/features/profile/presentation/screens/chef_profile_screen.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
 class Approute {
@@ -33,14 +38,22 @@ class Approute {
       case "/signup":
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(locator<AuthRepository>()),
+            create: (context) => AuthBloc(
+              locator<LoginUserCase>(),
+              locator<RegisterUseCase>(),
+              locator<LogoutUseCase>(),
+            ),
             child: const SingUpScreen(),
           ),
         );
       case "/login":
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(locator<AuthRepository>()),
+            create: (context) => AuthBloc(
+              locator<LoginUserCase>(),
+              locator<RegisterUseCase>(),
+              locator<LogoutUseCase>(),
+            ),
             child: const Loginscreen(),
           ),
         );
@@ -88,6 +101,10 @@ class Approute {
         );
       case "/sellerdashboard":
         return MaterialPageRoute(builder: (context) => const SellerDashboard());
+      case "/chefprofile":
+        return MaterialPageRoute(
+          builder: (context) => const ChefProfileScreen(),
+        );
       default:
         return null;
     }

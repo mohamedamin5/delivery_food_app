@@ -17,7 +17,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration.zero, () async {
       FocusScope.of(context).requestFocus(_focusNodes[0]);
     });
   }

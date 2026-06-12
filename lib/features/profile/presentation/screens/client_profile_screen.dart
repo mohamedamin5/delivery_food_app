@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/ui_essentials.dart';
 import 'package:flutter_application_2/features/profile/presentation/widget/profile_menu_item.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ClientProfileScreen extends StatefulWidget {
+  const ClientProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ClientProfileScreen> createState() => _ClientProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ClientProfileScreenState extends State<ClientProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

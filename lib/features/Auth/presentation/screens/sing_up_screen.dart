@@ -5,9 +5,10 @@ import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
 import 'package:flutter_application_2/core/widget/app_text_field.dart';
 import 'package:flutter_application_2/core/widget/custom_arroe_back_icon.dart';
-import 'package:flutter_application_2/features/Auth/logic/aut_event.dart';
-import 'package:flutter_application_2/features/Auth/logic/auth_bloc.dart';
-import 'package:flutter_application_2/features/Auth/logic/auth_state.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/aut_event.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_state.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingUpScreen extends StatefulWidget {

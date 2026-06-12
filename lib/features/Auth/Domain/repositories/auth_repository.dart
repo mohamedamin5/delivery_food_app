@@ -1,3 +1,7 @@
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_2/core/errors/failures.dart';
+import 'package:flutter_application_2/features/Auth/Domain/entities/auth_entity.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
 
@@ -7,7 +11,7 @@ class AuthRepository {
 
   AuthRepository(this.localDataSource, this.remoteDataSource);
 
-  Future<String> login({
+  Future<Either<Failure, AuthEntity>> login({
     required String email,
     required String password,
   }) async {
@@ -19,14 +23,15 @@ class AuthRepository {
         response.role,
         response.userId,
       );
+      await FirebaseAuth.instance.signInWithCustomToken(response.firebaseToken);
 
-      return response.role;
+      return Right(response);
     } catch (e) {
-      throw Exception('Login failed: $e');
+      return Left(ServerFailure("Login failed: $e"));
     }
   }
 
-  Future<String> register({
+  Future<Either<Failure, AuthEntity>> register({
     required String username,
     required String password,
     required String email,
@@ -46,9 +51,14 @@ class AuthRepository {
         response.role,
         response.userId,
       );
-      return response.role;
+      await FirebaseAuth.instance.signInWithCustomToken(response.firebaseToken);
+      return Right(response);
     } catch (e) {
-      throw Exception('Registration failed: $e');
+      return Left(ServerFailure("Registration failed: $e"));
     }
+  }
+
+  Future<void> logout() async {
+    await localDataSource.clearAuthData();
   }
 }

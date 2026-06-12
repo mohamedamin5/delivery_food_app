@@ -53,6 +53,7 @@ dependencies:
   path: ^1.9.1
   firebase_core: ^4.9.0
   firebase_auth: ^6.5.1
+  dartz: ^0.10.1
   
   
 

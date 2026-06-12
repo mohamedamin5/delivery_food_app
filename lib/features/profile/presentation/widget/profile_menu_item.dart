@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileMenuItem extends StatelessWidget {
   const ProfileMenuItem({
@@ -20,7 +21,7 @@ class ProfileMenuItem extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon, color: color),
-          SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Text(title),
           Spacer(),
           Icon(Icons.arrow_forward_ios_outlined),

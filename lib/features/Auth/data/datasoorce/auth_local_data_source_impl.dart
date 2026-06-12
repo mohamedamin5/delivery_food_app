@@ -11,6 +11,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     await storage.delete(StorageKeys.accessToken);
     await storage.delete(StorageKeys.refreshToken);
     await storage.delete(StorageKeys.role);
+    await storage.delete(StorageKeys.userId);
   }
 
   @override
@@ -29,5 +30,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     await storage.save(StorageKeys.refreshToken, refreshToken);
     await storage.save(StorageKeys.role, role);
     await storage.save(StorageKeys.userId, userId);
+  }
+
+  @override
+  Future<void> updateAccessToken(String newAccessToken) async {
+    await storage.save(StorageKeys.accessToken, newAccessToken);
   }
 }

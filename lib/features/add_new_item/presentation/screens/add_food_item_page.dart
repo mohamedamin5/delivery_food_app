@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/core/ui_essentials.dart';
-import 'package:flutter_application_2/core/utils/file_path_utils.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/event_bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/state_bloc.dart';
@@ -24,7 +23,13 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
-  int? selectedCategoryId;
+  String? selectedCategoryId;
+
+  @override
+  void initState() {
+    context.read<AddNewItemBloc>().add(GetAllCategoriesRequested());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -61,170 +66,175 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
             );
           } else if (s is GetAllCategoriesFailure) {
             return Center(
-              child: Text(
-                appLocalizations.translate("error_loading_categories"),
+              child: Column(
+                children: [
+                  Text(appLocalizations.translate("error_loading_categories")),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<AddNewItemBloc>().add(
+                        GetAllCategoriesRequested(),
+                      );
+                    },
+                    child: Text("retry"),
+                  ),
+                ],
               ),
             );
-          } else if (s is GetAllCategoriesSuccess) {
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Image Picker Placeholder
-                    Center(
-                      child: GestureDetector(
-                        onTap: () async {
-                          XFile? imagepicker = await picker.pickImage(
-                            source: ImageSource.gallery,
-                          );
-                          setState(() {
-                            if (imagepicker != null) {
-                              image = imagepicker;
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("===============")),
-                              );
-                            }
-                          });
-                        },
-                        child: Container(
-                          height: 150,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(15.r),
-                            border: Border.all(color: Colors.grey[300]!),
-                          ),
-                          child: image == null
-                              ? Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add_a_photo,
-                                      size: 40.sp,
-                                      color: Color(0xFFFF7622),
-                                    ),
-                                    SizedBox(height: 8.h),
-                                    Text(
-                                      appLocalizations.translate(
-                                        "text_add_item_image",
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Image.file(
-                                  File(image!.path),
-                                  fit: BoxFit.cover,
-                                ),
+          }
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Image Picker Placeholder
+                  Center(
+                    child: GestureDetector(
+                      onTap: () async {
+                        XFile? imagepicker = await picker.pickImage(
+                          source: ImageSource.gallery,
+                        );
+                        setState(() {
+                          if (imagepicker != null) {
+                            image = imagepicker;
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("===============")),
+                            );
+                          }
+                        });
+                      },
+                      child: Container(
+                        height: 150,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(15.r),
+                          border: Border.all(color: Colors.grey[300]!),
                         ),
+                        child: image == null
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add_a_photo,
+                                    size: 40.sp,
+                                    color: Color(0xFFFF7622),
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  Text(
+                                    appLocalizations.translate(
+                                      "text_add_item_image",
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Image.file(File(image!.path), fit: BoxFit.cover),
                       ),
                     ),
-                    const SizedBox(height: 25),
+                  ),
+                  const SizedBox(height: 25),
 
-                    _buildLabel(appLocalizations.translate("Text_item_name")),
-                    _buildTextField(
-                      appLocalizations,
-                      nameController,
-                      Icons.fastfood,
-                    ),
+                  _buildLabel(appLocalizations.translate("Text_item_name")),
+                  _buildTextField(
+                    appLocalizations,
+                    nameController,
+                    Icons.fastfood,
+                  ),
 
-                    _buildLabel(
-                      appLocalizations.translate("Text_item_description"),
-                    ),
-                    _buildTextField(
-                      appLocalizations,
-                      descController,
-                      Icons.description,
-                      maxLines: 3,
-                    ),
+                  _buildLabel(
+                    appLocalizations.translate("Text_item_description"),
+                  ),
+                  _buildTextField(
+                    appLocalizations,
+                    descController,
+                    Icons.description,
+                    maxLines: 3,
+                  ),
 
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildLabel(
-                                appLocalizations.translate("Text_item_price"),
-                              ),
-                              _buildTextField(
-                                appLocalizations,
-                                priceController,
-                                Icons.attach_money,
-                                isNumber: true,
-                              ),
-                            ],
-                          ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildLabel(
+                              appLocalizations.translate("Text_item_price"),
+                            ),
+                            _buildTextField(
+                              appLocalizations,
+                              priceController,
+                              Icons.attach_money,
+                              isNumber: true,
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildLabel(
-                                appLocalizations.translate(
-                                  "Text_item_category",
-                                ),
-                              ),
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildLabel(
+                              appLocalizations.translate("Text_item_category"),
+                            ),
+                            if (s is GetAllCategoriesSuccess)
                               _buildCategoryDropdown(
                                 appLocalizations,
                                 s.categories,
                               ),
-                            ],
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
 
-                    const SizedBox(height: 40),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 55,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (image == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("=============================="),
-                              ),
-                            );
-                            return;
-                          } else {
-                            context.read<AddNewItemBloc>().add(
-                              AddNewItemRequested(
-                                name: nameController.text,
-                                description: descController.text,
-                                price: double.parse(priceController.text),
-                                file: File(image!.path),
-                              ),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFF7622),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                  const SizedBox(height: 40),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (image == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("=============================="),
+                            ),
+                          );
+                          return;
+                        } else {
+                          context.read<AddNewItemBloc>().add(
+                            AddNewItemRequested(
+                              name: nameController.text,
+                              description: descController.text,
+                              price: double.parse(priceController.text),
+                              file: File(image!.path),
+                            ),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFF7622),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Text(
-                          appLocalizations.translate("button_save"),
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                      ),
+                      child: Text(
+                        appLocalizations.translate("button_save"),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          }
-          return const SizedBox.shrink();
+            ),
+          );
         },
         listener: (context, state) {
           if (state is AddNewItemLoading) {
@@ -244,12 +254,11 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
             Navigator.pop(context);
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text("فففففففف")));
+            ).showSnackBar(SnackBar(content: Text("Item added successfully!")));
             clearForm();
           } else if (state is AddNewItemFailure) {
             Navigator.pop(context);
 
-            print("Error adding item: ${state.error}");
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.error)));
@@ -290,7 +299,7 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
     AppLocalizations appLocalizations,
     List categories,
   ) {
-    return DropdownButtonFormField<int>(
+    return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.grey[50],
@@ -301,10 +310,7 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
       ),
       hint: Text(appLocalizations.translate("text_select_category")),
       items: categories.map((cat) {
-        return DropdownMenuItem<int>(
-          value: cat['id'],
-          child: Text(cat['name']),
-        );
+        return DropdownMenuItem<String>(value: cat[0], child: Text(cat[1]));
       }).toList(),
       onChanged: (val) => setState(() => selectedCategoryId = val),
       validator: (val) => val == null

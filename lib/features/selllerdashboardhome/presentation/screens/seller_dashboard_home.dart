@@ -369,7 +369,7 @@ class SellerDashboard extends StatelessWidget {
               size: 28.sp,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "/editrestaurantpage");
+              Navigator.pushNamed(context, "/chefprofile");
             },
           ),
         ],

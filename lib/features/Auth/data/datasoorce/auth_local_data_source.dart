@@ -7,4 +7,5 @@ abstract class AuthLocalDataSource {
   );
   Future<String?> getAuthData(String key);
   Future<void> clearAuthData();
+  Future<void> updateAccessToken(String newAccessToken);
 }

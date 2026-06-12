@@ -6,7 +6,6 @@ import 'package:flutter_application_2/features/add_new_item/data/repositories/re
 class AddNewItemBloc extends Bloc<AddNewItemEvent, AddNewItemState> {
   AddItemRepository repository;
   AddNewItemBloc(this.repository) : super(AddNewItemInitial()) {
-    add(GetAllCategoriesRequested());
     on<AddNewItemRequested>((event, emit) async {
       emit(AddNewItemLoading());
       try {
@@ -20,8 +19,8 @@ class AddNewItemBloc extends Bloc<AddNewItemEvent, AddNewItemState> {
     on<GetAllCategoriesRequested>((event, emit) async {
       emit(GetAllCategoriesLoading());
       try {
-        await Future.delayed(const Duration(seconds: 2));
-        final categories = <String>["Electronics", "Books", "Clothing", "Home"];
+        final categories = await repository.getALlCategories();
+
         emit(GetAllCategoriesSuccess(categories));
       } catch (e) {
         emit(GetAllCategoriesFailure(e.toString()));

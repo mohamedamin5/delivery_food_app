@@ -2,32 +2,29 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_2/core/network/api_endpoints.dart';
 import 'package:flutter_application_2/core/network/i_api_consumer.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source.dart';
-import 'package:flutter_application_2/features/Auth/data/models/auth_response_model.dart';
+import 'package:flutter_application_2/features/Auth/data/models/auth_model.dart';
 
 class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
   final IApiConsumer api;
 
   AuthRemoteDataSourceImp(this.api);
   @override
-  Future<AuthResponseModel> login(String email, String password) async {
+  Future<AuthModel> login(String email, String password) async {
     try {
       final response = await api.post(
         ApiEndpoints.login,
         body: {"email": email, "password": password},
       );
-      final authModel = AuthResponseModel.fromJson(response);
-      await FirebaseAuth.instance.signInWithCustomToken(
-        authModel.firebaseToken,
-      );
+      final authModel = AuthModel.fromJson(response);
+
       return authModel;
     } catch (e) {
-      print("Login error: $e");
       rethrow;
     }
   }
 
   @override
-  Future<AuthResponseModel> register(
+  Future<AuthModel> register(
     String username,
     String password,
     String email,
@@ -42,8 +39,7 @@ class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
         'phone': phone,
       },
     );
-    final authModel = AuthResponseModel.fromJson(response);
-    await FirebaseAuth.instance.signInWithCustomToken(authModel.firebaseToken);
+    final authModel = AuthModel.fromJson(response);
     return authModel;
   }
 }

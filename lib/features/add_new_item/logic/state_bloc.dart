@@ -26,7 +26,7 @@ class AddNewItemFailure extends AddNewItemState {
 class GetAllCategoriesLoading extends AddNewItemState {}
 
 class GetAllCategoriesSuccess extends AddNewItemState {
-  final List<String> categories;
+  final List<AddItemResponseModel> categories;
   const GetAllCategoriesSuccess(this.categories);
 }
 
