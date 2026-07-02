@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/blocs_imports.dart';
+
 import 'package:flutter_application_2/features/profile/presentation/widget/profile_menu_item.dart';
+import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
+import 'package:flutter_application_2/features/splashscreens/logic/splash_event.dart';
 
 class ChefProfileScreen extends StatelessWidget {
   const ChefProfileScreen({super.key});
@@ -110,6 +114,7 @@ class ChefProfileScreen extends StatelessWidget {
                     },
                     color: Color(0xffff7622),
                   ),
+                  SizedBox(height: 16),
                   ProfileMenuItem(
                     icon: Icons.settings_outlined,
 
@@ -117,18 +122,21 @@ class ChefProfileScreen extends StatelessWidget {
                     onTap: () {},
                     color: Colors.blue,
                   ),
+                  SizedBox(height: 16),
                   ProfileMenuItem(
                     icon: Icons.credit_card_outlined,
                     title: "Withdrawal History",
                     onTap: () {},
                     color: Color(0xffff7622),
                   ),
+                  SizedBox(height: 16),
                   ProfileMenuItem(
                     icon: Icons.receipt_long_outlined,
                     title: "Number of Orders",
                     color: Colors.cyan,
                     onTap: () {},
                   ),
+                  SizedBox(height: 16),
                   ProfileMenuItem(
                     icon: Icons.grid_view_outlined,
 
@@ -136,12 +144,12 @@ class ChefProfileScreen extends StatelessWidget {
                     onTap: () {},
                     color: Colors.teal,
                   ),
+                  SizedBox(height: 16),
                   ProfileMenuItem(
                     icon: Icons.logout,
                     title: "Log Out",
                     onTap: () {
-                      // هنا مستقبلاً هتستدعي البلوك اللي شرحناه:
-                      // context.read<AuthBloc>().add(LogoutRequested());
+                      context.read<SplashBloc>().add(LogoutRequested());
                     },
                     color: Colors.red,
                   ),

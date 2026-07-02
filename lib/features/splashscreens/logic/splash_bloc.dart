@@ -32,6 +32,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         }
       }
     });
+
+    on<LogoutRequested>((event, emit) async {
+      await _authLocalDataSource.clearAuthData();
+      emit(Unauthenticated());
+    });
   }
 }
 

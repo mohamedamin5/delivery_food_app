@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         response.fold(
           (failure) => emit(AuthFailure(failure.message)),
           (authEntity) => emit(
-            AuthSeccess(
+            AuthSuccess(
               role: authEntity.role == 'customer'
                   ? UserRole.customer
                   : UserRole.chef,
@@ -48,7 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         response.fold(
           (failure) => emit(AuthFailure(failure.message)),
           (authEntity) => emit(
-            AuthSeccess(
+            AuthSuccess(
               role: authEntity.role == 'customer'
                   ? UserRole.customer
                   : UserRole.chef,

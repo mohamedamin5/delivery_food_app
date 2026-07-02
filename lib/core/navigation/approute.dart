@@ -5,13 +5,12 @@ import 'package:flutter_application_2/features/Auth/Domain/usecases/login_user_c
 import 'package:flutter_application_2/features/Auth/Domain/usecases/logout_use_case.dart';
 import 'package:flutter_application_2/features/Auth/Domain/usecases/register_use_case.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source_impl.dart';
-import 'package:flutter_application_2/features/Auth/Domain/repositories/auth_repository.dart';
 import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_bloc.dart';
-
 import 'package:flutter_application_2/features/Home/logic/home_bloc/home_bloc_import.dart';
 import 'package:flutter_application_2/core/navigation/screens.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/usecases/add_item_use_case.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/usecases/get_all_categories_use_case.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/bloc.dart';
-import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
 import 'package:flutter_application_2/features/profile/presentation/screens/chef_profile_screen.dart';
 import 'package:flutter_application_2/features/splashscreens/logic/splash_bloc.dart';
 
@@ -91,13 +90,16 @@ class Approute {
       case "/addfooditempage":
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => AddNewItemBloc(locator<AddItemRepository>()),
+            create: (context) => AddNewItemBloc(
+              locator<AddItemUseCase>(),
+              locator<GetAllCategoriesUseCase>(),
+            ),
             child: AddFoodItemPage(),
           ),
         );
       case "/editrestaurantpage":
         return MaterialPageRoute(
-          builder: (context) => const RestaurantProfileEditor(),
+          builder: (context) => const ChefRestaurantSetupScreen(),
         );
       case "/sellerdashboard":
         return MaterialPageRoute(builder: (context) => const SellerDashboard());

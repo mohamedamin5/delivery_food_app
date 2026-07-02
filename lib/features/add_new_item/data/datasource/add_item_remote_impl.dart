@@ -13,10 +13,10 @@ class AddItemRemoteImpl implements AddItemRemote {
 
   @override
   Future<List<AddItemResponseModel>> getallCategories() async {
-    final reponse = await api.get(ApiEndpoints.categories);
-    return (reponse["categories"] as List)
-        .map((e) => AddItemResponseModel.fromJson(e))
-        .toList();
+    final response = await api.get(ApiEndpoints.categories);
+    return List<AddItemResponseModel>.from(
+      response["categories"].map((e) => AddItemResponseModel.fromJson(e)),
+    );
   }
 
   @override

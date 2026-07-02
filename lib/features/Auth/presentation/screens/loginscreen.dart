@@ -7,8 +7,6 @@ import 'package:flutter_application_2/core/widget/app_text_field.dart';
 import 'package:flutter_application_2/features/Auth/presentation/bloc/aut_event.dart';
 import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_application_2/features/Auth/presentation/bloc/auth_state.dart';
-
-import 'package:flutter_application_2/features/splashscreens/logic/splash_state.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -33,31 +31,28 @@ class _LoginscreenState extends State<Loginscreen> {
             context: context,
             barrierDismissible: false,
             builder: (context) => const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 7,
-                backgroundColor: AppColors.dark,
-                color: AppColors.primary,
-                strokeCap: StrokeCap.round,
+              child: Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 7,
+                  backgroundColor: AppColors.dark,
+                  color: AppColors.primary,
+                  strokeCap: StrokeCap.round,
+                ),
               ),
             ),
           );
-        } else if (state is AuthSeccess) {
+        } else if (state is AuthSuccess) {
           Navigator.pop(context);
-          if (state.role == UserRole.chef) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              "/sellerdashboard",
-              (r) => false,
-            );
-          } else {
-            Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
-          }
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            "/sellerdashboard",
+            (route) => false,
+          );
         } else if (state is AuthFailure) {
           Navigator.pop(context);
-
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.error)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error), backgroundColor: Colors.red),
+          );
         }
       },
       child: Scaffold(

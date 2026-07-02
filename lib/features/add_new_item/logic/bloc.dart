@@ -1,15 +1,24 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/usecases/add_item_use_case.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/usecases/get_all_categories_use_case.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/event_bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/state_bloc.dart';
-import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
 
 class AddNewItemBloc extends Bloc<AddNewItemEvent, AddNewItemState> {
-  AddItemRepository repository;
-  AddNewItemBloc(this.repository) : super(AddNewItemInitial()) {
+  final AddItemUseCase addItemUseCase;
+  final GetAllCategoriesUseCase getAllCategoriesUseCase;
+  AddNewItemBloc(this.addItemUseCase, this.getAllCategoriesUseCase)
+    : super(AddNewItemInitial()) {
     on<AddNewItemRequested>((event, emit) async {
       emit(AddNewItemLoading());
       try {
-        await Future.delayed(const Duration(seconds: 2));
+        await addItemUseCase.addItemToDatabase(
+          event.name,
+          event.description,
+          event.price,
+          event.categoryId,
+          event.file,
+        );
         emit(AddNewItemSuccess());
       } catch (e) {
         emit(AddNewItemFailure(e.toString()));
@@ -18,13 +27,12 @@ class AddNewItemBloc extends Bloc<AddNewItemEvent, AddNewItemState> {
 
     on<GetAllCategoriesRequested>((event, emit) async {
       emit(GetAllCategoriesLoading());
-      try {
-        final categories = await repository.getALlCategories();
 
-        emit(GetAllCategoriesSuccess(categories));
-      } catch (e) {
-        emit(GetAllCategoriesFailure(e.toString()));
-      }
+      final categories = await getAllCategoriesUseCase.execute();
+      categories.fold(
+        (failure) => emit(GetAllCategoriesFailure(failure)),
+        (categories) => emit(GetAllCategoriesSuccess(categories)),
+      );
     });
   }
 }

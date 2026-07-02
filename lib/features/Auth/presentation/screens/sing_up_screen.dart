@@ -46,22 +46,24 @@ class _SingUpScreenState extends State<SingUpScreen> {
             context: context,
             barrierDismissible: false,
             builder: (context) => const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 7,
-                backgroundColor: AppColors.dark,
-                color: AppColors.primary,
-                strokeCap: StrokeCap.round,
+              child: Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 7,
+                  backgroundColor: AppColors.dark,
+                  color: AppColors.primary,
+                  strokeCap: StrokeCap.round,
+                ),
               ),
             ),
           );
-        } else if (state is AuthSeccess) {
+        } else if (state is AuthSuccess) {
           Navigator.pop(context);
-          Navigator.pushReplacementNamed(context, "/home");
+          Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
         } else if (state is AuthFailure) {
           Navigator.pop(context);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.error)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error), backgroundColor: Colors.red),
+          );
         }
       },
       child: Scaffold(

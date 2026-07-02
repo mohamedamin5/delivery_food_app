@@ -23,3 +23,5 @@ class EditRestaurantProfileRequested extends EditRestaurantProfileEvent {
   @override
   List<Object> get props => [name, description, address, phoneNumber];
 }
+
+class GetProfileInfo extends EditRestaurantProfileEvent {}

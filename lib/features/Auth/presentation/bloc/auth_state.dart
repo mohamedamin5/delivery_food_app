@@ -12,9 +12,9 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
-class AuthSeccess extends AuthState {
+class AuthSuccess extends AuthState {
   final UserRole role;
-  const AuthSeccess({required this.role});
+  const AuthSuccess({required this.role});
 }
 
 class AuthFailure extends AuthState {

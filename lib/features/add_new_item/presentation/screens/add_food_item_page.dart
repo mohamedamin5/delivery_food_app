@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/blocs_imports.dart';
 import 'package:flutter_application_2/core/ui_essentials.dart';
+import 'package:flutter_application_2/features/add_new_item/data/model/add_item_response_model.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/event_bloc.dart';
 import 'package:flutter_application_2/features/add_new_item/logic/state_bloc.dart';
@@ -23,7 +24,7 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
-  String? selectedCategoryId;
+  int? selectedCategoryId;
 
   @override
   void initState() {
@@ -68,7 +69,8 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
             return Center(
               child: Column(
                 children: [
-                  Text(appLocalizations.translate("error_loading_categories")),
+                  Text(s.error),
+
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
@@ -136,59 +138,70 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
                     ),
                   ),
                   const SizedBox(height: 25),
-
-                  _buildLabel(appLocalizations.translate("Text_item_name")),
-                  _buildTextField(
-                    appLocalizations,
-                    nameController,
-                    Icons.fastfood,
-                  ),
-
-                  _buildLabel(
-                    appLocalizations.translate("Text_item_description"),
-                  ),
-                  _buildTextField(
-                    appLocalizations,
-                    descController,
-                    Icons.description,
-                    maxLines: 3,
-                  ),
-
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildLabel(
-                              appLocalizations.translate("Text_item_price"),
-                            ),
-                            _buildTextField(
-                              appLocalizations,
-                              priceController,
-                              Icons.attach_money,
-                              isNumber: true,
-                            ),
-                          ],
+                  Form(
+                    child: Column(
+                      children: [
+                        _buildLabel(
+                          appLocalizations.translate("Text_item_name"),
                         ),
-                      ),
-                      const SizedBox(width: 15),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        _buildTextField(
+                          appLocalizations,
+                          nameController,
+                          Icons.fastfood,
+                        ),
+
+                        _buildLabel(
+                          appLocalizations.translate("Text_item_description"),
+                        ),
+                        _buildTextField(
+                          appLocalizations,
+                          descController,
+                          Icons.description,
+                          maxLines: 3,
+                        ),
+
+                        Row(
                           children: [
-                            _buildLabel(
-                              appLocalizations.translate("Text_item_category"),
-                            ),
-                            if (s is GetAllCategoriesSuccess)
-                              _buildCategoryDropdown(
-                                appLocalizations,
-                                s.categories,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildLabel(
+                                    appLocalizations.translate(
+                                      "Text_item_price",
+                                    ),
+                                  ),
+                                  _buildTextField(
+                                    appLocalizations,
+                                    priceController,
+                                    Icons.attach_money,
+                                    isNumber: true,
+                                  ),
+                                ],
                               ),
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildLabel(
+                                    appLocalizations.translate(
+                                      "Text_item_category",
+                                    ),
+                                  ),
+                                  if (s is GetAllCategoriesSuccess)
+                                    _buildCategoryDropdown(
+                                      appLocalizations,
+                                      s.categories,
+                                    ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 
                   const SizedBox(height: 40),
@@ -205,14 +218,17 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
                           );
                           return;
                         } else {
-                          context.read<AddNewItemBloc>().add(
-                            AddNewItemRequested(
-                              name: nameController.text,
-                              description: descController.text,
-                              price: double.parse(priceController.text),
-                              file: File(image!.path),
-                            ),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            context.read<AddNewItemBloc>().add(
+                              AddNewItemRequested(
+                                name: nameController.text,
+                                description: descController.text,
+                                price: double.parse(priceController.text),
+                                categoryId: selectedCategoryId!,
+                                file: File(image!.path),
+                              ),
+                            );
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -297,9 +313,9 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
 
   Widget _buildCategoryDropdown(
     AppLocalizations appLocalizations,
-    List categories,
+    List<AddItemResponseModel> categories,
   ) {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField<int>(
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.grey[50],
@@ -309,8 +325,11 @@ class _AddFoodItemPageState extends State<AddFoodItemPage> {
         ),
       ),
       hint: Text(appLocalizations.translate("text_select_category")),
-      items: categories.map((cat) {
-        return DropdownMenuItem<String>(value: cat[0], child: Text(cat[1]));
+      items: categories.map((category) {
+        return DropdownMenuItem<int>(
+          value: category.id,
+          child: Text(category.name),
+        );
       }).toList(),
       onChanged: (val) => setState(() => selectedCategoryId = val),
       validator: (val) => val == null

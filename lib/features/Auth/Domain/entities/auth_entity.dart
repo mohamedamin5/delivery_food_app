@@ -16,5 +16,11 @@ class AuthEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+    accessToken,
+    refreshToken,
+    firebaseToken,
+    userId,
+    role,
+  ];
 }

@@ -17,13 +17,15 @@ class AuthRepository {
   }) async {
     try {
       final response = await remoteDataSource.login(email, password);
+
+      await FirebaseAuth.instance.signInWithCustomToken(response.firebaseToken);
+
       await localDataSource.saveAuthData(
         response.accessToken,
         response.refreshToken,
         response.role,
         response.userId,
       );
-      await FirebaseAuth.instance.signInWithCustomToken(response.firebaseToken);
 
       return Right(response);
     } catch (e) {
@@ -44,14 +46,13 @@ class AuthRepository {
         email,
         phone,
       );
-
+      await FirebaseAuth.instance.signInWithCustomToken(response.firebaseToken);
       await localDataSource.saveAuthData(
         response.accessToken,
         response.refreshToken,
         response.role,
         response.userId,
       );
-      await FirebaseAuth.instance.signInWithCustomToken(response.firebaseToken);
       return Right(response);
     } catch (e) {
       return Left(ServerFailure("Registration failed: $e"));

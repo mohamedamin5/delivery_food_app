@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:flutter_application_2/core/errors/failures.dart';
 import 'package:flutter_application_2/features/Auth/Domain/entities/auth_entity.dart';
 import 'package:flutter_application_2/features/Auth/Domain/repositories/auth_repository.dart';

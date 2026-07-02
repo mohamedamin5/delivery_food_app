@@ -18,7 +18,7 @@ class LoginUserCase {
       );
     }
 
-    if (email.contains("@") || email.contains(".com")) {
+    if (!email.contains("@") || !email.contains(".com")) {
       return Left(ValidationFailure("Email must contain '@' and '.com'"));
     }
     return await repository.login(email: email, password: password);

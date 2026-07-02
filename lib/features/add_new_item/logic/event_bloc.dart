@@ -12,10 +12,12 @@ abstract class AddNewItemEvent extends Equatable {
 class AddNewItemRequested extends AddNewItemEvent {
   final String name;
   final String description;
+  final int categoryId;
   final double price;
   final File file;
 
   const AddNewItemRequested({
+    required this.categoryId,
     required this.name,
     required this.description,
     required this.price,

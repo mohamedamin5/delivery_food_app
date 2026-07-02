@@ -66,7 +66,7 @@ class SellerDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(var lang) {
+  Widget _buildHeader(AppLocalizations appLocalizations) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -81,7 +81,7 @@ class SellerDashboard extends StatelessWidget {
         Column(
           children: [
             Text(
-              lang.translate("text_location"),
+              appLocalizations.translate("text_location"),
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
@@ -143,7 +143,7 @@ class SellerDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildRevenueCard(var lang) {
+  Widget _buildRevenueCard(AppLocalizations appLocalizations) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
       decoration: BoxDecoration(
@@ -160,7 +160,7 @@ class SellerDashboard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    lang.translate("text_total_revenue"),
+                    appLocalizations.translate("text_total_revenue"),
                     style: TextStyle(color: Color(0xFF9EA3AE), fontSize: 14.sp),
                   ),
                   SizedBox(height: 5.h),
@@ -180,7 +180,7 @@ class SellerDashboard extends StatelessWidget {
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      lang.translate("button_see_details"),
+                      appLocalizations.translate("button_see_details"),
                       style: const TextStyle(
                         color: AppColors.primary,
                         decoration: TextDecoration.underline,
@@ -199,7 +199,7 @@ class SellerDashboard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          lang.translate("text_daily"),
+                          appLocalizations.translate("text_daily"),
                           style: TextStyle(fontSize: 12.sp, color: Colors.grey),
                         ),
                         Icon(
@@ -228,7 +228,7 @@ class SellerDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewsCard(var lang) {
+  Widget _buildReviewsCard(AppLocalizations appLocalizations) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
       decoration: BoxDecoration(
@@ -241,7 +241,7 @@ class SellerDashboard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                lang.translate("text_reviews"),
+                appLocalizations.translate("text_reviews"),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.sp,
@@ -251,7 +251,7 @@ class SellerDashboard extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  lang.translate("button_see_all_reviews"),
+                  appLocalizations.translate("button_see_all_reviews"),
                   style: const TextStyle(
                     color: AppColors.primary,
                     decoration: TextDecoration.underline,
@@ -275,7 +275,7 @@ class SellerDashboard extends StatelessWidget {
               ),
               SizedBox(width: 15.w),
               Text(
-                lang.translate("text_total_reviews"),
+                appLocalizations.translate("text_total_reviews"),
                 style: TextStyle(color: Color(0xFF9EA3AE), fontSize: 15.sp),
               ),
             ],
@@ -285,14 +285,14 @@ class SellerDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularItemsSection(var lang) {
+  Widget _buildPopularItemsSection(AppLocalizations appLocalizations) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              lang.translate("text_popular_items_this_weeks"),
+              appLocalizations.translate("text_popular_items_this_weeks"),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15.sp,
@@ -302,7 +302,7 @@ class SellerDashboard extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text(
-                lang.translate("button_see_all"),
+                appLocalizations.translate("button_see_all"),
                 style: const TextStyle(color: AppColors.primary),
               ),
             ),

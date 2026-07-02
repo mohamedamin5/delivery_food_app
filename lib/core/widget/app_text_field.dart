@@ -10,6 +10,7 @@ class AppTextField extends StatefulWidget {
     required this.validator,
     required this.controller,
     required this.keyboardType,
+    int? maxLines,
   });
   final String? hintText;
   final TextInputType? keyboardType;

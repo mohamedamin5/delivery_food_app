@@ -8,3 +8,5 @@ abstract class SplashEvent extends Equatable {
 }
 
 class AppStarted extends SplashEvent {}
+
+class LogoutRequested extends SplashEvent {}

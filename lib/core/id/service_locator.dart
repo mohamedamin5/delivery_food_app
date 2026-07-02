@@ -12,8 +12,13 @@ import 'package:flutter_application_2/features/Auth/Domain/usecases/register_use
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_local_data_source_impl.dart';
 import 'package:flutter_application_2/features/Auth/data/datasoorce/auth_remote_data_source_imp.dart';
 import 'package:flutter_application_2/features/Auth/Domain/repositories/auth_repository.dart';
+import 'package:flutter_application_2/features/EditRestaurantProfileScreen/Domain/cases/get_profile_info_use_case.dart';
+import 'package:flutter_application_2/features/EditRestaurantProfileScreen/Domain/repositories/eidt_restaurant_profile_repo.dart';
+import 'package:flutter_application_2/features/EditRestaurantProfileScreen/data/datasource/edit_profile_impl.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/usecases/add_item_use_case.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/usecases/get_all_categories_use_case.dart';
 import 'package:flutter_application_2/features/add_new_item/data/datasource/add_item_remote_impl.dart';
-import 'package:flutter_application_2/features/add_new_item/data/repositories/repository.dart';
+import 'package:flutter_application_2/features/add_new_item/Domian/repositories/repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -66,7 +71,6 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<AddItemRepository>(
     () => AddItemRepository(
       locator<FirebaseStorageImpl>(),
-      locator<AuthLocalDataSourceImpl>(),
       locator<ImageCompressorService>(),
       locator<AddItemRemoteImpl>(),
     ),
@@ -86,5 +90,26 @@ Future<void> setupLocator() async {
   );
   locator.registerLazySingleton<LogoutUseCase>(
     () => LogoutUseCase(locator<AuthRepository>()),
+  );
+  locator.registerLazySingleton<AddItemUseCase>(
+    () => AddItemUseCase(
+      locator<AuthLocalDataSourceImpl>(),
+      locator<AddItemRepository>(),
+    ),
+  );
+  locator.registerLazySingleton<GetAllCategoriesUseCase>(
+    () => GetAllCategoriesUseCase(locator<AddItemRepository>()),
+  );
+  locator.registerLazySingleton<EditProfileImpl>(
+    () => EditProfileImpl(
+      locator<IApiConsumer>(),
+      locator<AuthLocalDataSourceImpl>(),
+    ),
+  );
+  locator.registerLazySingleton<EidtRestaurantProfileRepo>(
+    () => EidtRestaurantProfileRepo(locator<EditProfileImpl>()),
+  );
+  locator.registerLazySingleton<GetProfileInfoUseCase>(
+    () => GetProfileInfoUseCase(locator<EidtRestaurantProfileRepo>()),
   );
 }

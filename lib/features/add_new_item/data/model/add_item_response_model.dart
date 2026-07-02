@@ -1,19 +1,17 @@
-class AddItemResponseModel {
-  final int id;
-  final String name;
-  final String imageUrl;
+import 'package:flutter_application_2/features/add_new_item/Domian/Entities/add_item_entity.dart';
 
-  AddItemResponseModel({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
+class AddItemResponseModel extends AddItemEntity {
+  const AddItemResponseModel({
+    required super.id,
+    required super.name,
+    required super.imageUrl,
   });
 
   factory AddItemResponseModel.fromJson(Map<String, dynamic> json) {
     return AddItemResponseModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      imageUrl: json['picture'] as String,
+      id: json['id'],
+      name: json['name'],
+      imageUrl: json['picture'],
     );
   }
 }
