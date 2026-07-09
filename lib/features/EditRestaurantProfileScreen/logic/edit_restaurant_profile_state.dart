@@ -12,9 +12,9 @@ class EditRestaurantProfileInitial extends EditRestaurantProfileState {}
 class EditRestaurantProfileLoading extends EditRestaurantProfileState {}
 
 class EditRestaurantProfileSuccess extends EditRestaurantProfileState {
-  final String name;
-  final String description;
-  final String pucature;
+  final String? name;
+  final String? description;
+  final String? pucature;
 
   const EditRestaurantProfileSuccess({
     required this.name,

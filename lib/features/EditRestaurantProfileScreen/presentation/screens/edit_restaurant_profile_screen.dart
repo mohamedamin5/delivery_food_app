@@ -1,11 +1,15 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_application_2/blocs_imports.dart';
+import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
 import 'package:flutter_application_2/core/themes/appcolor.dart';
 import 'package:flutter_application_2/core/widget/app_button.dart';
 import 'package:flutter_application_2/core/widget/app_text_field.dart';
-import 'package:flutter_application_2/core/localization/app_localizations_delegate.dart';
+import 'package:flutter_application_2/features/EditRestaurantProfileScreen/logic/edit_restaurant_profile_bloc.dart';
+import 'package:flutter_application_2/features/EditRestaurantProfileScreen/logic/edit_restaurant_profile_state.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChefRestaurantSetupScreen extends StatefulWidget {
   const ChefRestaurantSetupScreen({super.key});
@@ -47,15 +51,44 @@ class _ChefRestaurantSetupScreenState extends State<ChefRestaurantSetupScreen> {
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF1E1E2E),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildHeader(appLocalizations),
-              _buildSetupForm(appLocalizations),
-            ],
+    return BlocListener<EditRestaurantProfileBloc, EditRestaurantProfileState>(
+      listener: (context, state) {
+        if (state is EditRestaurantProfileLoading) {
+          // Show loading indicator
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) =>
+                const Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is EditRestaurantProfileSuccess) {
+          // Hide loading indicator
+          Navigator.of(context).pop();
+          // Show success message
+          _restaurantNameController.text = state.name ?? '';
+          _descriptionController.text = state.description ?? '';
+        } else if (state is EditRestaurantProfileFailure) {
+          // Hide loading indicator
+          Navigator.of(context).pop();
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error: ${state.error}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFF1E1E2E),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildHeader(appLocalizations),
+                _buildSetupForm(appLocalizations),
+              ],
+            ),
           ),
         ),
       ),

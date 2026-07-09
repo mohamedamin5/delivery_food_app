@@ -9,9 +9,9 @@ class RestaurantModel extends RestaurantEntity {
 
   factory RestaurantModel.fromJson(Map<String, String> json) {
     return RestaurantModel(
-      restaurantDescription: json['restaurant_name'] as String,
-      restaurantName: json['restaurant_description'] as String,
-      restaurantPicture: json['restaurant_picture'] as String,
+      restaurantDescription: json['restaurant_description'] ?? '',
+      restaurantName: json['restaurant_name'] ?? '',
+      restaurantPicture: json['restaurant_picture'] ?? '',
     );
   }
 }

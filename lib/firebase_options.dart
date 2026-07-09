@@ -57,7 +57,6 @@ class DefaultFirebaseOptions {
     projectId: 'food-delivery-7e914',
     storageBucket: 'food-delivery-7e914.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC2FTMRdu_nCTwODHZJFqnHiTmVSG9JbtE',
     appId: '1:543931891633:ios:f3b19012a796bf54f5c790',
@@ -66,7 +65,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'food-delivery-7e914.firebasestorage.app',
     iosBundleId: 'com.example.flutterApplication2',
   );
-
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyC2FTMRdu_nCTwODHZJFqnHiTmVSG9JbtE',
     appId: '1:543931891633:ios:f3b19012a796bf54f5c790',

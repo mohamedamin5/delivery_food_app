@@ -1,7 +1,7 @@
 class RestaurantEntity {
-  final String restaurantName;
-  final String restaurantDescription;
-  final String restaurantPicture;
+  final String? restaurantName;
+  final String? restaurantDescription;
+  final String? restaurantPicture;
 
   RestaurantEntity({
     required this.restaurantName,
